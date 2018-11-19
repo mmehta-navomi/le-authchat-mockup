@@ -1,0 +1,16 @@
+{
+  "name": "le-authchat-mockup",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": "https://github.com/mmehta-navomi/le-authchat-mockup.git",
+  "author": "Manan Mehta",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js",
+    "watch": "nodemon app.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0"
+  }
+}
