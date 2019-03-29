@@ -2,94 +2,84 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
         <title>LE Auth Test Page</title>
     </head>
     <body>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+        <button type="button" name="btn1" onclick="btnclick();">Click Here</button>
         <script>
-        var accountId = '18940064'; //75070123
+            function btnclick(){
+
+                axios.get('/btnclick')
+                .then((resposne)=>{
+                    console.log(resposne.data.id_token);
+                })
+                .catch((err)=>{
+                    console.log(err);
+                })
+            }
+        // var accountId = '34185714';
+        var accountId = '75070123';
+        // var accountId = '56355204';
         </script>
         <!-- BEGIN LivePerson Monitor. GA -->
         <script type="text/javascript">window.lpTag=window.lpTag||{},'undefined'==typeof window.lpTag._tagCount?(window.lpTag={wl:lpTag.wl||null,scp:lpTag.scp||null,site:accountId||'',section:lpTag.section||'',tagletSection:lpTag.tagletSection||null,autoStart:lpTag.autoStart!==!1,ovr:lpTag.ovr||{},_v:'1.10.0',_tagCount:1,protocol:'https:',events:{bind:function(t,e,i){lpTag.defer(function(){lpTag.events.bind(t,e,i)},0)},trigger:function(t,e,i){lpTag.defer(function(){lpTag.events.trigger(t,e,i)},1)}},defer:function(t,e){0===e?(this._defB=this._defB||[],this._defB.push(t)):1===e?(this._defT=this._defT||[],this._defT.push(t)):(this._defL=this._defL||[],this._defL.push(t))},load:function(t,e,i){var n=this;setTimeout(function(){n._load(t,e,i)},0)},_load:function(t,e,i){var n=t;t||(n=this.protocol+'//'+(this.ovr&&this.ovr.domain?this.ovr.domain:'lptag.liveperson.net')+'/tag/tag.js?site='+this.site);var o=document.createElement('script');o.setAttribute('charset',e?e:'UTF-8'),i&&o.setAttribute('id',i),o.setAttribute('src',n),document.getElementsByTagName('head').item(0).appendChild(o)},init:function(){this._timing=this._timing||{},this._timing.start=(new Date).getTime();var t=this;window.attachEvent?window.attachEvent('onload',function(){t._domReady('domReady')}):(window.addEventListener('DOMContentLoaded',function(){t._domReady('contReady')},!1),window.addEventListener('load',function(){t._domReady('domReady')},!1)),'undefined'===typeof window._lptStop&&this.load()},start:function(){this.autoStart=!0},_domReady:function(t){this.isDom||(this.isDom=!0,this.events.trigger('LPT','DOM_READY',{t:t})),this._timing[t]=(new Date).getTime()},vars:lpTag.vars||[],dbs:lpTag.dbs||[],ctn:lpTag.ctn||[],sdes:lpTag.sdes||[],hooks:lpTag.hooks||[],identities:lpTag.identities||[],ev:lpTag.ev||[]},lpTag.init()):window.lpTag._tagCount+=1;</script>
         <!-- END LivePerson Monitor. -->
-        <div id="lp-chat-header"></div>
 
     </body>
-    <!-- <button type="button" name="button" onclick="callsdes();">CallSDES</button> -->
     <script type="text/javascript">
-    console.log("set customerId");
 
+    // Required to Pass the indentity after the lpTag defined
+    console.log("set indentity");
 
-        // var lpMethods = {
-            window.lpGetAuthenticationToken = function(callback) {
-                console.log("LP asked for id_token");
-                // Do your magic...
-                // On Success
-                axios.get('/getjwt')
-                    .then((response) =>{
-                        console.log(response)
-                        callback(response.data.jwt);
-                    })
-                    .catch((err) =>{
-                        console.log (err);
-                        // On Failure
-                        callback(err, "error reason");
-                    })
-            }
-            // Or, if you want to provide a redirect_uri as well (instead of the default "https://liveperson.net")
-            // lpGetAuthenticationTokenWithRedirectURI: function(callback) {
-            //     console.log("LP asked for id_token");
-            //     // Do your magic...
-            //     // On Success
-            //     callback({ssoKey: id_token, redirect_uri: uri});
-            //     // On Failure
-            //     callback({}, "error reason");
-            // }
-        // };
-        //}
-        lpTag.sdes = lpTag.sdes||[];
-        lpTag.sdes.push(
-           {
-              "type": "ctmrinfo",
-              "info": {
-                  "customerId": "1351gh3s1hg"
-                  // ,"ctype": "vip"
-                  // ,"companyBranch":"whatever"
-              }
-         });
+    //Refer to document for more info on 'identityFn': https://developers.liveperson.com/mobile-sdk-and-web-authentication-detailed-api.html
+    let random = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    console.log(`random= ${random}`);
+        //Need to set identity info to initizing
+          lpTag.identities = []
+          lpTag.identities.push(identityFn);
+          function identityFn(callback) {
+              callback({
+                  iss: "issuerInfo",
+                  acr: "loa1", //don't need to change this
+                  sub: "indetitySub"
+              });
+          }
+          //JWT Token
+          // var id_token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTU1MDA2Nzc5NCwiZXhwIjoxNTgxNjAzNzk0LCJpYXQiOjE1NTAwNjc3OTQsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.jR2M9z3Lyuce2vNxR8xnEtnZfTBQMsojCXQhMM0_wATplnUbtZxNgyDIVKroTX0lPQGRGNjRNe0JejsOsNatW7-N0DEY-h_1FiODU61bzh4Fkp2HH2-2BOqAnzyG_bqe38Q81x7IDtav8WG4qzs-oWNr10TbX069Z1KNA3rlVLuP0WopgUVyR9o8j6gLb5GyWTZj8bYL0gsBLb-3OXS7yINUoBlk5Gpo7j0obI4CVtmW1y-J1rl3Wd6iV4cY8hE6vKm3vb5sDpoIbaGTKRQF1EQdhNbnJLN9pljduRX1sm-WTwYmzc17ECPfqDfaMCUHfZGuvKknOhIqodpxQ3tiEA"
 
-        function callFrame(data){
-            console.log('callfromifram=='+JSON.stringify(data));
-            let statusnumber = null;
-            if(data.status ==='true'){
-                statusnumber = 2
+        // 'lpGetAuthenticationToken' is set to window context rather than 'lpMethods' context.
+        // PLEASE UPDATE THE FUNCTION ON THE PAGE LIKE BELOW
+        var lpGetAuthenticationToken = function(callback) {
+            console.log("LP asked for id_token");
+            // Do your magic...
+            // if id_token is in session storage use that or get new token
+            if(sessionStorage.getItem('id_token') != null){
+                let id_token = sessionStorage.getItem('id_token');
+                console.log("=========");
+                console.log(id_token);
+                console.log("=========");
+                callback(id_token);
             }else {
-                statusnumber = 4
+                axios.get(`/getjwt?visitor=${random}`)
+                .then((response) =>{
+                    // On Success
+                    let id_token = response.data.id_token;
+                    //store token in  session storage
+                    sessionStorage.setItem('id_token', id_token);
+
+                    console.log(id_token);
+                    callback(id_token);
+
+                })
+                .catch((err) =>{
+                    console.log('Error Getting JWT');
+                    console.log(err);
+                })
             }
-
-                lpTag.sdes.push(
-                   {
-                        "type": "service",  //MANDATORY
-                        "service": {
-                           "topic": "BioMetric Verification Result",  // SERVICE ACTIVITY TOPIC OR NAME
-                           "status": statusnumber,  // STATUS ENUM
-                            // 0-Complete, 1-In Progress, 2-Approved, 3-cancelled, 4-Not Approved,
-                            // 5-Reviewed, 6-Missing Details, 7-Closed, 8-Removed, 9-Assigned,
-                            // 10-Waiting for Customer Response, 11-Waiting for Response, 12-Pending, 13-Resolved
-                           "category": "Auth",  // SERVICE CATEGORY NAME
-                           "serviceId": `${data.status}:${data.token}`  // SERVICE UNIQUE IDENTIFIER OR TICKET ID
-                        }
-                   },
-                   {
-                        "type": "ctmrinfo",  //MANDATORY
-                        "info": {
-                           "cstatus": data.status   //CUSTOMER LIFECYCLE STATUS. FROM PRE-DEFINED LIST
-                       }
-                    }
-                )
-
         }
+
     </script>
 </html>

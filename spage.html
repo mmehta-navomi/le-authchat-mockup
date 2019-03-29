@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+
+        <title>LE Auth Test Page</title>
+    </head>
+    <body>
+        <script>
+        // var accountId = '34185714';
+        var accountId = '75070123';
+        // var accountId = '56355204';
+        </script>
+        <!-- BEGIN LivePerson Monitor. GA -->
+        <script type="text/javascript">window.lpTag=window.lpTag||{},'undefined'==typeof window.lpTag._tagCount?(window.lpTag={wl:lpTag.wl||null,scp:lpTag.scp||null,site:accountId||'',section:lpTag.section||'',tagletSection:lpTag.tagletSection||null,autoStart:lpTag.autoStart!==!1,ovr:lpTag.ovr||{},_v:'1.10.0',_tagCount:1,protocol:'https:',events:{bind:function(t,e,i){lpTag.defer(function(){lpTag.events.bind(t,e,i)},0)},trigger:function(t,e,i){lpTag.defer(function(){lpTag.events.trigger(t,e,i)},1)}},defer:function(t,e){0===e?(this._defB=this._defB||[],this._defB.push(t)):1===e?(this._defT=this._defT||[],this._defT.push(t)):(this._defL=this._defL||[],this._defL.push(t))},load:function(t,e,i){var n=this;setTimeout(function(){n._load(t,e,i)},0)},_load:function(t,e,i){var n=t;t||(n=this.protocol+'//'+(this.ovr&&this.ovr.domain?this.ovr.domain:'lptag.liveperson.net')+'/tag/tag.js?site='+this.site);var o=document.createElement('script');o.setAttribute('charset',e?e:'UTF-8'),i&&o.setAttribute('id',i),o.setAttribute('src',n),document.getElementsByTagName('head').item(0).appendChild(o)},init:function(){this._timing=this._timing||{},this._timing.start=(new Date).getTime();var t=this;window.attachEvent?window.attachEvent('onload',function(){t._domReady('domReady')}):(window.addEventListener('DOMContentLoaded',function(){t._domReady('contReady')},!1),window.addEventListener('load',function(){t._domReady('domReady')},!1)),'undefined'===typeof window._lptStop&&this.load()},start:function(){this.autoStart=!0},_domReady:function(t){this.isDom||(this.isDom=!0,this.events.trigger('LPT','DOM_READY',{t:t})),this._timing[t]=(new Date).getTime()},vars:lpTag.vars||[],dbs:lpTag.dbs||[],ctn:lpTag.ctn||[],sdes:lpTag.sdes||[],hooks:lpTag.hooks||[],identities:lpTag.identities||[],ev:lpTag.ev||[]},lpTag.init()):window.lpTag._tagCount+=1;</script>
+        <!-- END LivePerson Monitor. -->
+
+    </body>
+    <script type="text/javascript">
+    var id_tok = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTU1MDA2Nzc5NCwiZXhwIjoxNTgxNjAzNzk0LCJpYXQiOjE1NTAwNjc3OTQsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.jR2M9z3Lyuce2vNxR8xnEtnZfTBQMsojCXQhMM0_wATplnUbtZxNgyDIVKroTX0lPQGRGNjRNe0JejsOsNatW7-N0DEY-h_1FiODU61bzh4Fkp2HH2-2BOqAnzyG_bqe38Q81x7IDtav8WG4qzs-oWNr10TbX069Z1KNA3rlVLuP0WopgUVyR9o8j6gLb5GyWTZj8bYL0gsBLb-3OXS7yINUoBlk5Gpo7j0obI4CVtmW1y-J1rl3Wd6iV4cY8hE6vKm3vb5sDpoIbaGTKRQF1EQdhNbnJLN9pljduRX1sm-WTwYmzc17ECPfqDfaMCUHfZGuvKknOhIqodpxQ3tiEA"
+    localStorage.setItem('id_token', id_tok);
+
+    var id_token = localStorage.getItem("id_token");
+    if (!id_token) {
+        id_token = sessionStorage.getItem("id_token");
+    }
+
+    function identityFn(callback) {
+        callback({
+            iss: "anonymous",
+            acr: "loa1", //don't need to change this
+            sub: "anonymous"
+        });
+    }
+
+    lpTag.identities = [];
+    lpTag.identities.push(identityFn);
+    console.log("id_token...");
+    console.log(id_token);
+    // this will be true if the user has already been authenticated
+    if (id_token) {
+        console.log("user already has id token.");
+        //JWT Token
+        // 'lpGetAuthenticationToken' is set to window context rather than 'lpMethods' context.
+        // PLEASE UPDATE THE FUNCTION ON THE PAGE LIKE BELOW
+        var lpGetAuthenticationToken = function(callback) {
+            console.log("LP asked for id_token");
+            console.log("id_token = " + id_token);
+            // Do your magic...
+            // On Success
+            console.log("attempting to display 'authenticated' chat...");
+            console.log('here is id_token');
+            console.log(id_token);
+            callback(id_token);
+        }
+    }
+    // window.addEventListener('load', function() {
+    //
+    //     console.log('lptag check');
+    //
+    //     console.log('lp tag status:');
+    //
+    //     console.log(window.lpTag);
+    //
+    //     console.log('lp tag count:' + window.lpTag._tagCount);
+    //
+    // })
+</script>
+</html>
