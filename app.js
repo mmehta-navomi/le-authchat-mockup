@@ -53,6 +53,9 @@ app.get('/page.html', function (req, res) {
 app.get('/spage.html', function (req, res) {
   res.sendFile(path.join(__dirname,'spage.html'));
 })
+app.get('/alpha-page.html', function (req, res) {
+  res.sendFile(path.join(__dirname,'alpha-page.html'));
+})
 app.get('/btnclick',csrfProtection, function (req, res) {
   res.send("button clicked....");
 })
