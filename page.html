@@ -4,22 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://lpcdn.lpsnmedia.net/webagent/client-SDK.min.js"></script>
 
         <title>LE Auth Test Page</title>
     </head>
     <body>
-        <button type="button" name="btn1" onclick="btnclick();">Click Here</button>
         <script>
-            function btnclick(){
-
-                axios.get('/btnclick')
-                .then((resposne)=>{
-                    console.log(resposne.data.id_token);
-                })
-                .catch((err)=>{
-                    console.log(err);
-                })
-            }
         // var accountId = '34185714';
         var accountId = '75070123';
         // var accountId = '56355204';
@@ -30,7 +20,24 @@
 
     </body>
     <script type="text/javascript">
-
+    let rtSessionId = '';
+    let accountNumber = '';
+    /**
+    * Get the value of a querystring
+    * @param  {String} field The field to get the value of
+    * @param  {String} url   The URL to get the value from (optional)
+    * @return {String}       The field value
+    */
+    var getQueryString = function ( field, url ) {
+        var href = url ? url : window.location.href;
+        var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
+        var string = reg.exec(href);
+        console.log(`url = ${url}`);
+        return string ? string[1] : null;
+    };
+    accountNumber = getQueryString('accountNumber', window.location.href);
+    rtSessionId = getQueryString('rtSessionId', window.location.href);
+    console.log(`accountNumber: ${accountNumber}, rtSessionId: ${rtSessionId}`);
     // Required to Pass the indentity after the lpTag defined
     console.log("set indentity");
 
@@ -47,8 +54,6 @@
                   sub: "indetitySub"
               });
           }
-          //JWT Token
-          // var id_token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTU1MDA2Nzc5NCwiZXhwIjoxNTgxNjAzNzk0LCJpYXQiOjE1NTAwNjc3OTQsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.jR2M9z3Lyuce2vNxR8xnEtnZfTBQMsojCXQhMM0_wATplnUbtZxNgyDIVKroTX0lPQGRGNjRNe0JejsOsNatW7-N0DEY-h_1FiODU61bzh4Fkp2HH2-2BOqAnzyG_bqe38Q81x7IDtav8WG4qzs-oWNr10TbX069Z1KNA3rlVLuP0WopgUVyR9o8j6gLb5GyWTZj8bYL0gsBLb-3OXS7yINUoBlk5Gpo7j0obI4CVtmW1y-J1rl3Wd6iV4cY8hE6vKm3vb5sDpoIbaGTKRQF1EQdhNbnJLN9pljduRX1sm-WTwYmzc17ECPfqDfaMCUHfZGuvKknOhIqodpxQ3tiEA"
 
         // 'lpGetAuthenticationToken' is set to window context rather than 'lpMethods' context.
         // PLEASE UPDATE THE FUNCTION ON THE PAGE LIKE BELOW
@@ -56,19 +61,26 @@
             console.log("LP asked for id_token");
             // Do your magic...
             // if id_token is in session storage use that or get new token
-            if(sessionStorage.getItem('id_token') != null){
-                let id_token = sessionStorage.getItem('id_token');
-                console.log("=========");
-                console.log(id_token);
-                console.log("=========");
-                callback(id_token);
-            }else {
-                axios.get(`/getjwt?visitor=${random}`)
+            // if(sessionStorage.getItem('id_token') != null){
+            //     let id_token = sessionStorage.getItem('id_token');
+            //     console.log("=========");
+            //     console.log(id_token);
+            //     console.log("=========");
+            //     callback(id_token);
+            // }else {
+                //check if widget running or it's cosnumer page
+                var url = '';
+                if(accountNumber == '' && rtSessionId == ''){
+                    url = `/getjwt?visitor=${random}`;
+                }else {
+                    url = `/getjwt?visitor=${accountNumber}--${rtSessionId}`;
+                }
+                axios.get(url)
                 .then((response) =>{
                     // On Success
                     let id_token = response.data.id_token;
                     //store token in  session storage
-                    sessionStorage.setItem('id_token', id_token);
+                    // sessionStorage.setItem('id_token', id_token);
 
                     console.log(id_token);
                     callback(id_token);
@@ -78,7 +90,7 @@
                     console.log('Error Getting JWT');
                     console.log(err);
                 })
-            }
+            // }
         }
 
     </script>

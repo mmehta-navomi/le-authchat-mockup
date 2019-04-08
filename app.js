@@ -77,7 +77,7 @@ console.log(`dateExp ${dateExp}`);
 // console.log('pubkey',pubkey);
 //sign jwt
 app.get('/getjwt',(req, res) =>{
-	console.log(req.query);
+	console.log(`getjwt query------${req.query}`);
 	let jwtConf = {
 	    "sub": req.query.visitor, //reprsent visitor; new value = new visitor
 	    "iss" : "https://www.example.com",
