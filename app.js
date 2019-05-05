@@ -50,6 +50,9 @@ app.use(function (err, req, res, next) {
 app.get('/page.html', function (req, res) {
   res.sendFile(path.join(__dirname,'page.html'));
 })
+app.get('/widget.html', function (req, res) {
+  res.sendFile(path.join(__dirname,'widget.html'));
+})
 app.get('/spage.html', function (req, res) {
   res.sendFile(path.join(__dirname,'spage.html'));
 })
@@ -69,8 +72,8 @@ const server = app.listen(app.get('port'), function() {
 });
 let dateNow = Math.round(Date.now()/1000);
 console.log(`dateNow ${dateNow}`);
-let twthrs = 24 * 60 * 60;
-let dateExp = (dateNow + twthrs);
+let monthexp = 30 * 24 * 60 * 60;
+let dateExp = (dateNow + monthexp);
 console.log(`dateExp ${dateExp}`);
 
 // console.log('privkey',privkey);

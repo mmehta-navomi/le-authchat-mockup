@@ -5,58 +5,86 @@
         <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="https://lpcdn.lpsnmedia.net/webagent/client-SDK.min.js"></script>
-        <script src="http://chancejs.com/chance.min.js"></script>
+        <script src="https://chancejs.com/chance.min.js"></script>
         <title>LE Auth Test Page</title>
     </head>
     <body>
         <script>
-        // var accountId = '34185714';
-        var accountId = '75070123';
-        // var accountId = '56355204';
+        // var siteId = '34185714';
+        var siteId = '75070123';
+        // var siteId = '56355204';
         </script>
         <!-- BEGIN LivePerson Monitor. GA -->
-        <script type="text/javascript">window.lpTag=window.lpTag||{},'undefined'==typeof window.lpTag._tagCount?(window.lpTag={wl:lpTag.wl||null,scp:lpTag.scp||null,site:accountId||'',agentSDK: lpTag.agentSDK || null,section:lpTag.section||'',tagletSection:lpTag.tagletSection||null,autoStart:lpTag.autoStart!==!1,ovr:lpTag.ovr||{},_v:'1.10.0',_tagCount:1,protocol:'https:',events:{bind:function(t,e,i){lpTag.defer(function(){lpTag.events.bind(t,e,i)},0)},trigger:function(t,e,i){lpTag.defer(function(){lpTag.events.trigger(t,e,i)},1)}},defer:function(t,e){0===e?(this._defB=this._defB||[],this._defB.push(t)):1===e?(this._defT=this._defT||[],this._defT.push(t)):(this._defL=this._defL||[],this._defL.push(t))},load:function(t,e,i){var n=this;setTimeout(function(){n._load(t,e,i)},0)},_load:function(t,e,i){var n=t;t||(n=this.protocol+'//'+(this.ovr&&this.ovr.domain?this.ovr.domain:'lptag.liveperson.net')+'/tag/tag.js?site='+this.site);var o=document.createElement('script');o.setAttribute('charset',e?e:'UTF-8'),i&&o.setAttribute('id',i),o.setAttribute('src',n),document.getElementsByTagName('head').item(0).appendChild(o)},init:function(){this._timing=this._timing||{},this._timing.start=(new Date).getTime();var t=this;window.attachEvent?window.attachEvent('onload',function(){t._domReady('domReady')}):(window.addEventListener('DOMContentLoaded',function(){t._domReady('contReady')},!1),window.addEventListener('load',function(){t._domReady('domReady')},!1)),'undefined'===typeof window._lptStop&&this.load()},start:function(){this.autoStart=!0},_domReady:function(t){this.isDom||(this.isDom=!0,this.events.trigger('LPT','DOM_READY',{t:t})),this._timing[t]=(new Date).getTime()},vars:lpTag.vars||[],dbs:lpTag.dbs||[],ctn:lpTag.ctn||[],sdes:lpTag.sdes||[],hooks:lpTag.hooks||[],identities:lpTag.identities||[],ev:lpTag.ev||[]},lpTag.init()):window.lpTag._tagCount+=1;</script>
+        <script type="text/javascript">window.lpTag=window.lpTag||{},'undefined'==typeof window.lpTag._tagCount?(window.lpTag={wl:lpTag.wl||null,scp:lpTag.scp||null,site:siteId||'',Chronos: lpTag.Chronos || null,agentSDK:lpTag.agentSDK|| null,section:lpTag.section||'',tagletSection:lpTag.tagletSection||null,autoStart:lpTag.autoStart!==!1,ovr:lpTag.ovr||{},_v:'1.10.0',_tagCount:1,protocol:'https:',events:{bind:function(t,e,i){lpTag.defer(function(){lpTag.events.bind(t,e,i)},0)},trigger:function(t,e,i){lpTag.defer(function(){lpTag.events.trigger(t,e,i)},1)}},defer:function(t,e){0===e?(this._defB=this._defB||[],this._defB.push(t)):1===e?(this._defT=this._defT||[],this._defT.push(t)):(this._defL=this._defL||[],this._defL.push(t))},load:function(t,e,i){var n=this;setTimeout(function(){n._load(t,e,i)},0)},_load:function(t,e,i){var n=t;t||(n=this.protocol+'//'+(this.ovr&&this.ovr.domain?this.ovr.domain:'lptag.liveperson.net')+'/tag/tag.js?site='+this.site);var o=document.createElement('script');o.setAttribute('charset',e?e:'UTF-8'),i&&o.setAttribute('id',i),o.setAttribute('src',n),document.getElementsByTagName('head').item(0).appendChild(o)},init:function(){this._timing=this._timing||{},this._timing.start=(new Date).getTime();var t=this;window.attachEvent?window.attachEvent('onload',function(){t._domReady('domReady')}):(window.addEventListener('DOMContentLoaded',function(){t._domReady('contReady')},!1),window.addEventListener('load',function(){t._domReady('domReady')},!1)),'undefined'===typeof window._lptStop&&this.load()},start:function(){this.autoStart=!0},_domReady:function(t){this.isDom||(this.isDom=!0,this.events.trigger('LPT','DOM_READY',{t:t})),this._timing[t]=(new Date).getTime()},vars:lpTag.vars||[],dbs:lpTag.dbs||[],ctn:lpTag.ctn||[],sdes:lpTag.sdes||[],hooks:lpTag.hooks||[],identities:lpTag.identities||[],ev:lpTag.ev||[]},lpTag.init()):window.lpTag._tagCount+=1;</script>
         <!-- END LivePerson Monitor. -->
 
     </body>
     <script type="text/javascript">
-    let rtSessionId = '';
-    let accountNumber = '';
-    /**
-    * Get the value of a querystring
-    * @param  {String} field The field to get the value of
-    * @param  {String} url   The URL to get the value from (optional)
-    * @return {String}       The field value
-    */
-    var getQueryString = function ( field, url ) {
-        var href = url ? url : window.location.href;
-        var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
-        var string = reg.exec(href);
-        console.log(`url = ${url}`);
-        return string ? string[1] : null;
+    let visitorName = chance.name();
+    console.log(`visitorName = ${visitorName}`);
+
+    let accountId = null;
+    console.log(`accountId = ${accountId}`);
+
+    let leConversationId = null;
+    console.log(`leConversationId = ${leConversationId}`);
+
+    var onSuccess = function(data){
+        // start internal conversation
+        accountId = data.accountId;
+        console.log(`accountId = ${accountId}`);
+
+        leConversationId = data.rtSessionId;
+        console.log(`leConversationId = ${leConversationId}`);
+    }
+    var onError = function(error){
+        console.log('Error while getting current chat data from SDK  = '  + error);
+        return;
+    }
+
+    //Agent SDK Notification Callback
+    var notificationHandler = function(data) {
+        // Do something with the notifications
+        console.log('notify an agent', data);
     };
-    accountNumber = getQueryString('accountNumber', window.location.href);
-    rtSessionId = getQueryString('rtSessionId', window.location.href);
-    console.log(`accountNumber: ${accountNumber}, rtSessionId: ${rtSessionId}`);
-    // Required to Pass the indentity after the lpTag defined
-    console.log("set indentity");
 
-    //Refer to document for more info on 'identityFn': https://developers.liveperson.com/mobile-sdk-and-web-authentication-detailed-api.html
-    let guid = chance.guid();
-    console.log(`Sub guid = ${guid}`);
+    //Get incoming line data engagement window
+    lpTag.hooks.push({
+      name: "AFTER_GET_LINES",
+      callback: function (options) {
+          options.data.lines.forEach(function(line){
+              // console.log(`line = ${JSON.stringify(line)}`);
+              if(line.source == "agent"){
+                  console.log('source is agent');
 
-        //Need to set identity info to initizing
-          lpTag.identities = []
-          lpTag.identities.push(identityFn);
-          function identityFn(callback) {
-              callback({
-                  iss: "issuerInfo",
-                  acr: "loa1", //don't need to change this
-                  sub: "indetitySub"
-              });
-          }
+                  // Add a notification handler in agent widget workspace
+                  // lpTag.agentSDK.onNotify(notificationHandler);
+                  lpTag.agentSDK.command(lpTag.agentSDK.cmdNames.notify,{}, notificationHandler);
+              }
+            // line.text = "some text";
+          });
+          return options;
+      }
+    });
 
-        // 'lpGetAuthenticationToken' is set to window context rather than 'lpMethods' context.
+    //Check for LPTag
+    console.log('LPTag SDK has loaded');
+    lpTag.agentSDK.init({notificationCallback: notificationHandler});
+    var convodata = "chatInfo";
+    lpTag.agentSDK.get(convodata, onSuccess, onError);
+
+    /***************** authentication block **********************/
+    //Need to set identity info to initizing
+      lpTag.identities = []
+      lpTag.identities.push(identityFn);
+      function identityFn(callback) {
+          callback({
+              iss: "issuerInfo",
+              acr: "loa1", //don't need to change this
+              sub: "indetitySub"
+          });
+      }
+    // 'lpGetAuthenticationToken' is set to window context rather than 'lpMethods' context.
         // PLEASE UPDATE THE FUNCTION ON THE PAGE LIKE BELOW
         var lpGetAuthenticationToken = function(callback) {
             console.log("LP asked for id_token");
@@ -70,29 +98,31 @@
             //     callback(id_token);
             // }else {
                 //check if widget running or it's cosnumer page
+
                 var url = '';
-                if(accountNumber == '' && rtSessionId == ''){
-                    url = `/getjwt?visitor=${guid}`;
+                if(accountId == null && leConversationId == null){
+                    url = `/getjwt?visitor=testuser`;
                 }else {
-                    url = `/getjwt?visitor=${accountNumber}--${rtSessionId}`;
+                    url = `/getjwt?visitor=${accountId}--${leConversationId}`;
                 }
                 axios.get(url)
-                .then((response) =>{
-                    // On Success
-                    let id_token = response.data.id_token;
-                    //store token in  session storage
-                    // sessionStorage.setItem('id_token', id_token);
+                    .then((response) =>{
+                        // On Success
+                        let id_token = response.data.id_token;
+                        //store token in  session storage
+                        // sessionStorage.setItem('id_token', id_token);
+                        console.log('Got id_token');
+                        console.log(id_token);
+                        callback(id_token);
 
-                    console.log(id_token);
-                    callback(id_token);
-
-                })
-                .catch((err) =>{
-                    console.log('Error Getting JWT');
-                    console.log(err);
-                })
+                    })
+                    .catch((err) =>{
+                        console.log('Error Getting JWT');
+                        console.log(err);
+                    })
             // }
         }
+        /***************** authentication block **********************/
 
     </script>
 </html>
