@@ -6,9 +6,11 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="https://lpcdn.lpsnmedia.net/webagent/client-SDK.min.js"></script>
         <script src="https://chancejs.com/chance.min.js"></script>
+        <link rel="stylesheet" href="/css/custom-chat-window.css">
         <title>LE Auth Test Page</title>
     </head>
     <body>
+        <p>This is Agent Widget Messaging Widget</p>
         <script>
         // var siteId = '34185714';
         var siteId = '75070123';
@@ -53,8 +55,7 @@
       name: "AFTER_GET_LINES",
       callback: function (options) {
           options.data.lines.forEach(function(line){
-              // console.log(`line = ${JSON.stringify(line)}`);
-              if(line.source == "agent"){
+              if(line.source === "agent" && line.state === "ACCEPT"){
                   console.log('source is agent');
 
                   // Add a notification handler in agent widget workspace
@@ -74,7 +75,7 @@
     lpTag.agentSDK.get(convodata, onSuccess, onError);
 
     /***************** authentication block **********************/
-    //Need to set identity info to initizing
+    //Need to set identity info to initializing
       lpTag.identities = []
       lpTag.identities.push(identityFn);
       function identityFn(callback) {

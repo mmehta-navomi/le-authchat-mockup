@@ -1,0 +1,554 @@
+body {
+  background-color: #f0f0f0;
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_system,.lp_desktop #lpChat>.lp_maximized .lp_main .lp_system .lp_time,.lp_desktop #lpChat>.lp_maximized .lp_main .lp_system .lp_title_text,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_system,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_system .lp_time,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_system .lp_title_text{
+    text-align:left!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_line .lp_title_text,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_line .lp_title_text p,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_visitor .lp_chat_line .lp_title_text,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_visitor .lp_chat_line .lp_title_text p{
+    color:#333!important;
+    font-family:Helvetica!important
+}
+.LPMcontainer:focus,.lp_desktop #lpChat>.lp_maximized .lp_header .lp_header-buttons-container button:focus,.lp_desktop #lpChat>.lp_maximized .lp_header .lp_slider:focus,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_header-buttons-container button:focus,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_slider:focus,.lp_mobile #lpChat>.lp_maximized .lp_header .lp_header-buttons-container button:focus,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout .lp-json-pollock-element-button button:focus,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_logo_area_wrapper .lp_logo_link:focus,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom .lp_input_area textarea:focus,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom button:focus{
+    outline:0!important
+}
+@-webkit-keyframes fadein{
+    0%,90%{
+        opacity:0
+    }
+    100%{
+        opacity:1
+    }
+}
+@-moz-keyframes fadein{
+    0%,90%{
+        opacity:0
+    }
+    100%{
+        opacity:1
+    }
+}
+@-o-keyframes fadein{
+    0%,90%{
+        opacity:0
+    }
+    100%{
+        opacity:1
+    }
+}
+@keyframes fadein{
+    0%,90%{
+        opacity:0
+    }
+    100%{
+        opacity:1
+    }
+}
+#lpChat .lp_transcript_widget{
+    background-color:#e7e4e3!important
+}
+.LPMcontainer img[src="https://www.liveperson.com/sites/default/files/pro-active-chat-19.svg"]{
+    left:-160px!important;
+    top:20px!important;
+    width:270px!important;
+    max-width:initial!important;
+    -webkit-animation:fadein 4s linear 1 normal forwards;
+    -moz-animation:fadein 4s linear 1 normal forwards;
+    animation:fadein 4s linear 1 normal forwards
+}
+.lp_mobile #lpChat>.lp_maximized{
+    opacity:1!important;
+    margin-bottom:0!important;
+    border-radius:0!important;
+    border:none!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom button.lp_send_button:disabled .lp_send-icon,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom button.lp_send_button:disabled .lp_send-icon{
+    opacity:.5
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main{
+    top:50px!important;
+    overflow:hidden!important;
+    border:none!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_logo_area_wrapper{
+    border:none;
+    padding-top:0!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_logo_area_wrapper .lp_logo_link{
+    height:auto!important;
+    margin:0!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_logo_area_wrapper .lp_logo_image_wrapper{
+    height:auto!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_logo_area_wrapper .lp_logo_image_wrapper .lp_image{
+    width:100%!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_time{
+    margin-top:10px!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_system{
+    margin-left:-2px
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_time{
+    padding:3px 3px 3px 43px
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_line{
+    background-color:#fff!important;
+    border:none!important;
+    padding:10px;
+    border-radius:20px
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_line .lp_title_text b,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_line .lp_title_text p b,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_line .lp_title_text p strong,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_line .lp_title_text strong{
+    font-weight:600
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_line .lp_title_text:after{
+    background:url(https://www.liveperson.com/sites/default/files/conv_page/chat-tail-white.svg) no-repeat;
+    display:block;
+    content:' ';
+    width:10px;
+    height:15px;
+    position:absolute;
+    margin-left:-16px;
+    bottom:0;
+    margin-top:-10px
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent.lp_chat_line_wrapper{
+    padding:0 20px 4px!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent.lp_chat_line_wrapper.agent_avatar_display .agent_avatar{
+    width:30px!important;
+    height:30px!important;
+    border-radius:50%
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout{
+    border:1px solid #fff!important;
+    overflow:hidden;
+    max-width:none!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout:last-of-type{
+    border-radius:0 20px 20px 0!important;
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout:first-of-type{
+    border-radius:20px 0 0 0!important;
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout:only-of-type{
+    border-radius:20px 20px 20px 0!important;
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout .lp-json-pollock-element-text{
+    background-color:#fff;
+    padding:10px
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout .lp-json-pollock-element-text span{
+    font-weight:400!important;
+    color:#333!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout .lp-json-pollock-element-button{
+    border-top:1px solid #fff!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout .lp-json-pollock-element-button button{
+    background-color:#e7e4e3!important;
+    margin-bottom:0!important;
+    color:#333!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout .lp-json-pollock-element-button button:hover{
+    background-color:#fff!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_arrow,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_arrow_border{
+    display:none!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_visitor .lp_chat_line{
+    border:none!important;
+    background-color:#adc5ec!important;
+    padding:10px;
+    border-radius:20px
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_visitor .lp_chat_line .lp_title_text:after{
+    background:url(https://www.liveperson.com/sites/default/files/conv_page/chat-tail-lightblue.svg) no-repeat;
+    display:block;
+    content:' ';
+    width:10px;
+    height:15px;
+    position:absolute;
+    bottom:-10px;
+    right:-12px;
+    -webkit-transform:scaleX(-1);
+    -moz-transform:scaleX(-1);
+    transform:scaleX(-1)
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_visitor .lp_chat_arrow,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_visitor .lp_chat_arrow_border{
+    display:none!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_header .lp_header-buttons-container .lp_close img,.lp_desktop #lpChat>.lp_maximized .lp_header .lp_header-buttons-container .lp_maximize img,.lp_desktop #lpChat>.lp_maximized .lp_header .lp_header-buttons-container .lp_minimize img,.lp_desktop #lpChat>.lp_maximized .lp_header .lp_slider .lp-slider-icon img,.lp_desktop #lpChat>.lp_maximized .lp_header .lp_title .lp_chatting-with-icon img,.lp_desktop #lpChat>.lp_maximized div.lp_slider .lp_slider_header .lp_minimize img,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_header-buttons-container .lp_close img,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_header-buttons-container .lp_maximize img,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_header-buttons-container .lp_minimize img,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_slider .lp-slider-icon img,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_title .lp_chatting-with-icon img,.lp_mobile #lpChat>.lp_maximized .lp_header .lp_header-buttons-container .lp_close img,.lp_mobile #lpChat>.lp_maximized .lp_header .lp_header-buttons-container .lp_minimize img,.lp_mobile #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom button.lp_send_button img{
+    display:none
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom{
+    height:50px;
+    box-shadow:0 0 10px 1px rgba(0,0,0,.2)!important;
+    border-top:none!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom .lp_input_area{
+    padding:18px 0!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom .lp_input_area textarea{
+    font-size:14px!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom .lp_input_area textarea::placeholder{
+    font-style:normal!important;
+    color:#d6d6d6!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_header .lp_top-text,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_top-text,.lp_mobile #lpChat>.lp_maximized .lp_header .lp_top-text{
+    color:#fff!important;
+    font-family:Helvetica!important;
+    font-weight:100!important;
+    font-size:16px
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom button{
+    top:14px!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom button.lp_send_button .lp_send-icon{
+    background-image:url(https://www.liveperson.com/sites/default/files/darksend.png);
+    background-repeat:no-repeat;
+    background-position:0 4px;
+    background-size:18px;
+    height:30px!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_main{
+    background-color:#e7e4e3!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_header{
+    border:none!important;
+    /* background-color:#5879da; */
+    height:50px!important;
+    border-bottom:none!important;
+    border-radius:0!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_header .lp_header-buttons-container button{
+    height:30px!important;
+    width:30px!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_header .lp_header-buttons-container .lp_close{
+    background-image:url(https://www.liveperson.com/sites/default/files/close-white.png);
+    background-repeat:no-repeat;
+    background-position:8px 10px;
+    background-size:16px;
+    height:40px!important;
+    top:6px!important;
+    right:6px!important
+}
+.lp_mobile #lpChat>.lp_maximized .lp_header .lp_header-buttons-container .lp_minimize{
+    background-image:url(https://www.liveperson.com/sites/default/files/minus-white.png);
+    background-repeat:no-repeat;
+    background-position:8px 10px;
+    background-size:16px;
+    height:40px!important;
+    top:6px!important;
+    left:6px!important
+}
+.lp_desktop #lpChat .lpmx{
+    box-shadow:0 0 10px 1px rgba(0,0,0,.2)!important
+}
+.lp_desktop #lpChat .lp_chat_line_wrapper{
+    padding:0 20px 4px!important
+}
+.lp_desktop #lpChat>.lp_minimized{
+    height:50px!important
+}
+.lp_desktop #lpChat>.lp_minimized .lp_notification_number{
+    margin-top:13px
+}
+.lp_desktop #lpChat>.lp_maximized,.lp_desktop #lpChat>.lp_minimized{
+    /* width:350px; */
+    /* width:500px; */
+    width:95%;
+    border:none!important;
+    box-shadow:0 0 10px 1px rgba(0,0,0,.2);
+    overflow:hidden
+}
+.lp_desktop #lpChat>.lp_maximized .lp_header,.lp_desktop #lpChat>.lp_minimized .lp_header{
+    border:none!important;
+    /* background-color:#5879da; */
+    height:50px;
+    border-bottom:1px solid #d6d6d6!important;
+    border-radius:0!important;
+    box-shadow:none!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_line .lp_title_text,.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_line .lp_title_text p,.lp_desktop #lpChat>.lp_maximized .lp_main .lp_visitor .lp_chat_line .lp_title_text,.lp_desktop #lpChat>.lp_maximized .lp_main .lp_visitor .lp_chat_line .lp_title_text p{
+    color:#333!important;
+    font-family:Helvetica!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_header .lp_title,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_title{
+    padding-top:16px!important;
+    margin-left:30px!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_header .lp_title .lp_chatting-with-icon,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_title .lp_chatting-with-icon{
+    background-image:url(https://www.liveperson.com/sites/default/files/chatbubble-white.png);
+    background-repeat:no-repeat;
+    background-position:2px 1px;
+    background-size:20px;
+    height:20px!important;
+    margin-left:-25px!important;
+    width:25px!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_header .lp_slider,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_slider{
+    height:36px!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_header .lp_slider .lp-slider-icon,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_slider .lp-slider-icon{
+    background-image:url(https://www.liveperson.com/sites/default/files/dots-white.png);
+    background-repeat:no-repeat;
+    background-position:2px 3px;
+    background-size:25px;
+    height:30px!important;
+    width:30px!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_header .lp_header-buttons-container,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_header-buttons-container{
+    margin-right:5px
+}
+.lp_desktop #lpChat>.lp_maximized div.lp_slider .lp_slider_header .lp_minimize:focus,.lp_desktop #lpChat>.lp_maximized div.lp_slider .lp_slider_header .lp_refresh:focus{
+    outline:0
+}
+.lp_desktop #lpChat>.lp_maximized .lp_header .lp_header-buttons-container button,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_header-buttons-container button{
+    height:30px!important;
+    width:30px!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_header .lp_header-buttons-container .lp_minimize,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_header-buttons-container .lp_minimize{
+    background-image:url(https://www.liveperson.com/sites/default/files/minus-white.png);
+    background-repeat:no-repeat;
+    background-position:8px 10px;
+    background-size:16px;
+    height:40px!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_header .lp_header-buttons-container .lp_maximize,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_header-buttons-container .lp_maximize{
+    background-image:url(https://www.liveperson.com/sites/default/files/expand-white.png);
+    background-repeat:no-repeat;
+    background-position:8px 10px;
+    background-size:16px;
+    height:40px!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_header .lp_header-buttons-container .lp_close,.lp_desktop #lpChat>.lp_minimized .lp_header .lp_header-buttons-container .lp_close{
+    background-image:url(https://www.liveperson.com/sites/default/files/close-white.png);
+    background-repeat:no-repeat;
+    background-position:8px 10px;
+    background-size:16px;
+    height:40px!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main{
+    background-color:#e7e4e3!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_header{
+    border:none!important
+}
+.lp_desktop #lpChat>.lp_maximized.lp_slider_open{
+    width:700px
+}
+.lp_desktop #lpChat>.lp_maximized.lp_slider_open .lp_header,.lp_desktop #lpChat>.lp_maximized.lp_slider_open .lp_main{
+    width:350px!important
+}
+.lp_desktop #lpChat>.lp_maximized div.lp_slider{
+    height:91%!important;
+    /* height:530px!important; */
+    /* height:600px!important; */
+    width:350px!important;
+    right:350px!important
+}
+.lp_desktop #lpChat>.lp_maximized div.lp_slider .lp_slider_container{
+    top:50px!important;
+    box-shadow:none!important;
+    border-right:1px solid #d6d6d6
+}
+.lp_desktop #lpChat>.lp_maximized div.lp_slider .lp_slider_header{
+    box-shadow:none!important;
+    background-color:#5879da;
+    border-radius:0!important;
+    height:50px;
+    border:none!important
+}
+.lp_desktop #lpChat>.lp_maximized div.lp_slider .lp_slider_header .lp_minimize{
+    background-image:url(https://www.liveperson.com/sites/default/files/expand-white.png);
+    background-repeat:no-repeat;
+    background-position:0 10px;
+    background-size:16px;
+    height:40px!important;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -o-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform:rotate(90deg)
+}
+.lp_desktop #lpChat>.lp_maximized div.lp_slider .lp_slider_header .lp_refresh{
+    top:10px!important;
+    left:10px!important;
+    background-repeat:no-repeat;
+    background-position:2px 3px;
+    background-size:20px;
+    height:30px!important;
+    width:30px!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout .lp-json-pollock-element-button button:focus,.lp_desktop #lpChat>.lp_maximized .lp_main .lp_logo_area_wrapper .lp_logo_link:focus,.lp_desktop #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom .lp_input_area textarea:focus,.lp_desktop #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom button:focus{
+    outline:0!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main{
+    top:50px!important;
+    overflow:hidden!important;
+    border:none!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_logo_area_wrapper{
+    border:none;
+    padding-top:0!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_logo_area_wrapper .lp_logo_link{
+    height:auto!important;
+    margin:0!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_logo_area_wrapper .lp_logo_image_wrapper{
+    height:auto!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_logo_area_wrapper .lp_logo_image_wrapper .lp_image{
+    width:100%!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_time{
+    margin-top:10px!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_system{
+    margin-left:-2px
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_time{
+    padding:3px 3px 3px 43px
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_line{
+    background-color:#fff!important;
+    border:none!important;
+    padding:10px;
+    border-radius:20px
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_line .lp_title_text b,.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_line .lp_title_text p b,.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_line .lp_title_text p strong,.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_line .lp_title_text strong{
+    font-weight:600
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_line .lp_title_text:after{
+    background:url(https://www.liveperson.com/sites/default/files/conv_page/chat-tail-white.svg) no-repeat;
+    display:block;
+    content:' ';
+    width:10px;
+    height:15px;
+    position:absolute;
+    margin-left:-16px;
+    bottom:0;
+    margin-top:-10px
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent.lp_chat_line_wrapper{
+    padding:0 20px 4px!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent.lp_chat_line_wrapper.agent_avatar_display .agent_avatar{
+    width:30px!important;
+    height:30px!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout .lp-json-pollock-element-text span{
+    font-weight:400!important;
+    color:#333!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout .lp-json-pollock-element-button button:hover{
+    background-color:#fff!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_arrow,.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_chat_arrow_border{
+    display:none!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_visitor .lp_chat_line{
+    border:none!important;
+    background-color:#adc5ec!important;
+    padding:10px;
+    border-radius:20px
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_visitor .lp_chat_line .lp_title_text:after{
+    background:url(https://www.liveperson.com/sites/default/files/conv_page/chat-tail-lightblue.svg) no-repeat;
+    display:block;
+    content:' ';
+    width:10px;
+    height:15px;
+    position:absolute;
+    bottom:-10px;
+    right:-12px;
+    -webkit-transform:scaleX(-1);
+    -moz-transform:scaleX(-1);
+    transform:scaleX(-1)
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_visitor .lp_chat_arrow,.lp_desktop #lpChat>.lp_maximized .lp_main .lp_visitor .lp_chat_arrow_border{
+    display:none!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom .lp_input_area{
+    padding:18px 0!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom .lp_input_area textarea{
+    font-size:14px!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom .lp_input_area textarea::placeholder{
+    font-style:normal!important;
+    color:#d6d6d6!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom button{
+    top:14px!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom button.lp_send_button img{
+    display:none
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom button.lp_send_button .lp_send-icon{
+    background-image:url(https://www.liveperson.com/sites/default/files/darksend.png);
+    background-repeat:no-repeat;
+    background-position:0 4px;
+    background-size:18px;
+    height:30px!important
+}
+.lp_desktop #lpChat>.lp_maximized{
+    /* height:600px!important; */
+    /* height:530px!important; */
+    height:91%!important;
+    border-radius:6px!important;
+    margin-bottom:15px;
+    width:95%;
+    /* width:500px */
+    /* width:350px */
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout{
+    border:1px solid #dedede!important;
+    overflow:hidden;
+    max-width:none!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout:last-of-type{
+    border-radius:0 20px 20px 0!important;
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout:first-of-type{
+    border-radius:20px 0 0 0!important;
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout:only-of-type{
+    border-radius:20px 20px 20px 0!important;
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout .lp-json-pollock-element-button button{
+    background-color:#e7e4e3!important;
+    color:#333!important
+}
+#lpChat .lp_chat_line_wrapper .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-element-button button {
+    padding: 0px !important;
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout .lp-json-pollock-element-button{
+    border-top:1px solid #fff!important
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_agent .lp_rich_content_line .lp_title_text .lp-json-pollock .lp-json-pollock-layout .lp-json-pollock-element-text{
+    background-color:#fff;
+    padding:10px
+}
+.lp_desktop #lpChat>.lp_maximized .lp_main .lp_main_area .lp_location_bottom{
+    height:50px;
+    box-shadow:0 0 10px 1px rgba(0,0,0,.2)!important;
+    border-top:none!important
+}
+#lpChat>.lpmx{
+    border:none!important
+}
+#lpChat .lp_location_center .lp_agent_image_area_wrapper,#lpChat .lp_location_center .lp_agent_image_area_wrapper .lp_image{
+    height:auto!important
+}
+#lpChat .lp_maximized .lp_slider .lp_slider_header .lp_title{
+    padding-top:16px!important
+}
+#lpChat .lp_maximized.lp_slider_open.lp_left_slider .lp_slider_container{
+    padding: 0px !important;
+    background-color: #d6d6d6 !important;
+}

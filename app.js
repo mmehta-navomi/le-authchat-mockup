@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const csurf = require('csurf');
 const cookieParser = require('cookie-parser');
-
+var moment = require('moment');
 
 // var axios = require('axios');
 var app = express();
@@ -46,19 +46,20 @@ app.use(function (err, req, res, next) {
   res.send('form tampered with')
 })
 //Using some public files
-// app.use(express.static('page.html'));
-app.get('/page.html', function (req, res) {
-  res.sendFile(path.join(__dirname,'page.html'));
-})
-app.get('/widget.html', function (req, res) {
-  res.sendFile(path.join(__dirname,'widget.html'));
-})
-app.get('/spage.html', function (req, res) {
-  res.sendFile(path.join(__dirname,'spage.html'));
-})
-app.get('/alpha-page.html', function (req, res) {
-  res.sendFile(path.join(__dirname,'alpha-page.html'));
-})
+app.use(express.static(path.join(__dirname, 'public')));
+
+// app.get('/page.html', function (req, res) {
+//   res.sendFile(path.join(__dirname,'page.html'));
+// })
+// app.get('/widget.html', function (req, res) {
+//   res.sendFile(path.join(__dirname,'widget.html'));
+// })
+// app.get('/spage.html', function (req, res) {
+//   res.sendFile(path.join(__dirname,'spage.html'));
+// })
+// app.get('/alpha-page.html', function (req, res) {
+//   res.sendFile(path.join(__dirname,'alpha-page.html'));
+// })
 app.get('/btnclick',csrfProtection, function (req, res) {
   res.send("button clicked....");
 })
@@ -68,36 +69,55 @@ app.set('port', process.env.PORT || 8080);  // set environment variable PORT=443
 
 const server = app.listen(app.get('port'), function() {
 	const port = server.address().port;
-    console.log(`Server Listen on Port ${port}`);
+    console.log(`Server is Listening on Port ${port} ...`);
 });
-let dateNow = Math.round(Date.now()/1000);
-console.log(`dateNow ${dateNow}`);
-let monthexp = 30 * 24 * 60 * 60;
-let dateExp = (dateNow + monthexp);
-console.log(`dateExp ${dateExp}`);
 
+
+/** Generate Paylod for JWT **/
+function generateJwt (subinfo){
+
+	let dateNow = Math.round(Date.now()/1000);
+	// console.log(`dateNow ${dateNow}`);
+	let monthexp = 30 * 24 * 60 * 60;
+	let dateExp = (dateNow + monthexp);
+	// console.log(`dateExp ${dateExp}`);
+	console.log('JWT Create UTC= ', moment.utc(dateNow*1000).format('LLLL'));
+	console.log('JWT Expire UTC= ', moment.utc(dateExp*1000).format('LLLL'));
+
+	let jwtconf = {};
+	jwtconf.sub = subinfo.visitor;
+	jwtconf.iss = "https://www.example.com";
+	jwtconf.iat = dateNow;
+	jwtconf.exp = dateExp;
+	jwtconf.aud = 'audiance'
+	return jwtconf;
+}
+// console.log('privkey',privkey);
 // console.log('privkey',privkey);
 // console.log('pubkey',pubkey);
-//sign jwt
-app.get('/getjwt',(req, res) =>{
-	console.log(`getjwt query------${req.query}`);
-	let jwtConf = {
-	    "sub": req.query.visitor, //reprsent visitor; new value = new visitor
-	    "iss" : "https://www.example.com",
-	    "exp" : dateExp,
-	    "iat" : dateNow
-	}
+app.get('/getjwt',async (req, res) =>{
+	console.log(`getjwt query------${JSON.stringify(req.query)}`);
 
-	console.log('JWT payload==>',jwtConf);
-	console.log('typeof privkey==>',typeof privkey);
-	console.log('typeof pubkey==>',typeof pubkey);
+	let jwtConf = await generateJwt(req.query);
+	// let jwtConf = {
+	//     "sub": req.query.visitor, //reprsent visitor; new value = new visitor
+	//     "iss" : "https://www.example.com",
+	//     "exp" : dateExp,
+	//     "iat" : dateNow
+	// }
 
+	console.log('JWT payload==>');
+	console.log(jwtConf);
+	// console.log('typeof privkey==>',typeof privkey);
+	// console.log('typeof pubkey==>',typeof pubkey);
+
+	// sign jwt
 	//generate jwt
-	let token = jwt.sign(jwtConf, privkey, { algorithm: 'RS256'}, function(err, token) {
-	// var jwttoken = jwt.sign({}, privkey, jwtConf, function(err, token) {
+	jwt.sign(jwtConf, privkey, { algorithm: 'RS256'}, function(err, token) {
 		if(err){
 			console.log('err==>',err);
 		}else {
+			console.log('JWT = ', token);
 			//verify token
 			let verify = jwt.verify(token,pubkey,function(err, decoded) {
 				if(err){
