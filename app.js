@@ -9,6 +9,8 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const csurf = require('csurf');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const helmet = require('helmet');
 var moment = require('moment');
 
 // var axios = require('axios');
@@ -30,13 +32,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(csrfProtection);
+app.use(helmet());
+
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      	frameAncestors: [
+        '*.le.liveperson.net'
+		]
+    }
+  }
+}));
+
+
 
 //Enable CORS
-app.use((req, res, next) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	next();
-});
+// app.use((req, res, next) => {
+// 	// res.header("Access-Control-Allow-Origin", "*");
+// 	res.header("Access-Control-Allow-Origin", "https://99b2bb6b.ngrok.io");
+// 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+// 	next();
+// });
+
 // error handler
 app.use(function (err, req, res, next) {
   if (err.code !== 'EBADCSRFTOKEN') return next(err)
@@ -48,20 +65,9 @@ app.use(function (err, req, res, next) {
 //Using some public files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.get('/page.html', function (req, res) {
-//   res.sendFile(path.join(__dirname,'page.html'));
-// })
-// app.get('/widget.html', function (req, res) {
-//   res.sendFile(path.join(__dirname,'widget.html'));
-// })
-// app.get('/spage.html', function (req, res) {
-//   res.sendFile(path.join(__dirname,'spage.html'));
-// })
-// app.get('/alpha-page.html', function (req, res) {
-//   res.sendFile(path.join(__dirname,'alpha-page.html'));
-// })
+// app.get('/btnclick',cors(corsOptions),csrfProtection, function (req, res) {
 app.get('/btnclick',csrfProtection, function (req, res) {
-  res.send("button clicked....");
+  	res.send("button clicked....");
 })
 // Define the port to run on
 app.set('port', process.env.PORT || 8080);  // set environment variable PORT=443 to run app on https

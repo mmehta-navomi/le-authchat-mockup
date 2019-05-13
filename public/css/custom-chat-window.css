@@ -259,7 +259,7 @@ body {
 .lp_desktop #lpChat>.lp_maximized,.lp_desktop #lpChat>.lp_minimized{
     /* width:350px; */
     /* width:500px; */
-    width:95%;
+    width:97%;
     border:none!important;
     box-shadow:0 0 10px 1px rgba(0,0,0,.2);
     overflow:hidden
@@ -499,10 +499,10 @@ body {
 .lp_desktop #lpChat>.lp_maximized{
     /* height:600px!important; */
     /* height:530px!important; */
-    height:91%!important;
+    height:97%!important;
     border-radius:6px!important;
     margin-bottom:15px;
-    width:95%;
+    width:97%;
     /* width:500px */
     /* width:350px */
 }

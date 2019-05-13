@@ -10,7 +10,10 @@
         <title>LE Auth Test Page</title>
     </head>
     <body>
-        <p>This is Agent Widget Messaging Widget</p>
+        <p>To reach out to an internal team, click below</p>
+        <!-- Chat button div -->
+        <div id="chatlink"></div>
+        <button type="button" name="button" onclick="btnclick();">Button</button>
         <script>
         // var siteId = '34185714';
         var siteId = '75070123';
@@ -22,6 +25,16 @@
 
     </body>
     <script type="text/javascript">
+    function btnclick (){
+        axios.get('/btnclick')
+            .then((response) =>{
+                console.log(response);
+            })
+            .catch((err) =>{
+                console.log(err);
+            })
+    }
+
     let visitorName = chance.name();
     console.log(`visitorName = ${visitorName}`);
 
