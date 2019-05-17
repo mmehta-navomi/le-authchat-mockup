@@ -16,23 +16,14 @@ var moment = require('moment');
 // var axios = require('axios');
 var app = express();
 
-var csrfProtection = csurf({ cookie: true });
-// var privkey = require('./privkey');
-/**
- * ToDo: Generating private keys and public keys
- */
 
-const privkeyloc = path.join('./', 'privkey.key');
-const pubkeyloc = path.join('./', 'pubkey.key');
-const privkey = fs.readFileSync(privkeyloc).toString('utf-8');
-const pubkey = fs.readFileSync(pubkeyloc).toString('utf-8');
-// console.log(privkey);
+app.use(helmet());
 // Body Parser
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+var csrfProtection = csurf({ cookie: true });
 app.use(csrfProtection);
-app.use(helmet());
 
 app.use(helmet({
   contentSecurityPolicy: {
@@ -44,6 +35,10 @@ app.use(helmet({
   }
 }));
 
+const privkeyloc = path.join('./', 'privkey.key');
+const pubkeyloc = path.join('./', 'pubkey.key');
+const privkey = fs.readFileSync(privkeyloc).toString('utf-8');
+const pubkey = fs.readFileSync(pubkeyloc).toString('utf-8');
 
 
 //Enable CORS
@@ -56,21 +51,22 @@ app.use(helmet({
 
 // error handler
 app.use(function (err, req, res, next) {
+	console.log(req.headers);
+	console.log(err);
   if (err.code !== 'EBADCSRFTOKEN') return next(err)
 
   // handle CSRF token errors here
   res.status(403)
-  res.send('form tampered with')
+  res.send('page tampered with')
 })
 //Using some public files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.get('/btnclick',cors(corsOptions),csrfProtection, function (req, res) {
-app.get('/btnclick',csrfProtection, function (req, res) {
-  	res.send("button clicked....");
+app.post('/btnclick', function (req, res) {
+      res.send("button clicked....");
 })
 // Define the port to run on
-app.set('port', process.env.PORT || 8080);  // set environment variable PORT=443 to run app on https
+app.set('port', process.env.PORT || 3000);  // set environment variable PORT=443 to run app on https
 
 
 const server = app.listen(app.get('port'), function() {
