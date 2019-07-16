@@ -21,9 +21,9 @@ app.use(helmet());
 // Body Parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cookieParser());
-var csrfProtection = csurf({ cookie: true });
-app.use(csrfProtection);
+// app.use(cookieParser());
+// var csrfProtection = csurf({ cookie: true });
+// app.use(csrfProtection);
 
 app.use(helmet({
   contentSecurityPolicy: {
@@ -50,15 +50,15 @@ const pubkey = fs.readFileSync(pubkeyloc).toString('utf-8');
 // });
 
 // error handler
-app.use(function (err, req, res, next) {
-	console.log(req.headers);
-	console.log(err);
-  if (err.code !== 'EBADCSRFTOKEN') return next(err)
-
-  // handle CSRF token errors here
-  res.status(403)
-  res.send('page tampered with')
-})
+// app.use(function (err, req, res, next) {
+// 	console.log(req.headers);
+// 	console.log(err);
+//   if (err.code !== 'EBADCSRFTOKEN') return next(err)
+//
+//   // handle CSRF token errors here
+//   res.status(403)
+//   res.send('page tampered with')
+// })
 //Using some public files
 app.use(express.static(path.join(__dirname, 'public')));
 
