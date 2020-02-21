@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Chat Bot</title>
+        <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/botui/build/botui.min.css" />
+        <link rel="stylesheet" href="https://unpkg.com/botui/build/botui-theme-default.css"/>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/vue/latest/vue.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/botui/build/botui.min.js"></script
+    </head>
+    <body>
+    <p>Chat Bot</p>
+
+    <!-- <button type="button" name="button" onclick="callBot()">Test Call</button> -->
+    <div class="botui-app-container" id="botui-app">
+        <bot-ui></bot-ui>
+        <div class="botui-actions-container">
+            <div class="">
+                <!-- <form class="botui-actions-text"> <input placeholder="Enter Text Here" required="required" class="botui-actions-text-input">
+                    <button type="submit" class="botui-actions-text-submit">
+                        <span>Go</span>
+                    </button>
+                </form> -->
+            </div>
+        </div>
+    </div>
+    </body>
+    <script type="text/javascript">
+        var loadingMsgIndex;
+        var botui = new BotUI('botui-app') // id of container
+        function init() {
+
+            botui.message.bot({ // show first message
+                delay: 200,
+                content: 'Hello, How are you?'
+            }).then(() => {
+                return botui.message.bot({ // second one
+                    delay: 1000, // wait 1 sec.
+                    content: 'This is Chat Bot. Ask me questions.'
+                })
+            }).then(function () {
+                return botui.action.text({
+                  delay: 1000,
+                  action: {
+                    value: '',
+                    placeholder: 'Ask Question Here ...'
+                  }
+                })
+              }).then(function (res) {
+                console.log(`res = ${res}`);
+                loadingMsgIndex = botui.message.bot({
+                  delay: 200,
+                  loading: true
+                }).then(function (index) {
+                  loadingMsgIndex = index;
+                  console.log(`loadingMsgIndex = ${loadingMsgIndex}`);
+                  console.log(`res.value = ${res.value}`);
+                  callBot(res.value)
+                });
+              });
+        }
+        function nextInit(){
+            botui.message.bot({ // show first message
+                delay: 200,
+                content: 'Please ask next quesetion!'
+            }).then(function () {
+                return botui.action.text({
+                  delay: 1000,
+                  action: {
+                    value: '',
+                    placeholder: 'Ask Question Here ...'
+                  }
+                })
+              }).then(function (res) {
+                console.log(`res = ${res}`);
+                loadingMsgIndex = botui.message.bot({
+                  delay: 200,
+                  loading: true
+                }).then(function (index) {
+                  loadingMsgIndex = index;
+                  console.log(`loadingMsgIndex = ${loadingMsgIndex}`);
+                  console.log(`res.value = ${res.value}`);
+                  callBot(res.value)
+                });
+              });
+        }
+
+        function callBot (userinput){
+            console.log(`userinput = ${userinput}`);
+            axios.post('http://localhost:8000/ask', {"question": userinput}, {auth:{username:'localusername',password:'localpassword'}})
+                .then((response) =>{
+                    console.log(`resposne = ${JSON.stringify(response.data.data.paragraph)}`);
+                    var answer = response.data.data.paragraph
+                    botui.message
+                      .update(loadingMsgIndex, {
+                        content: answer
+                      })
+                      .then(nextInit); // ask again for repo. Keep in loop.
+                })
+                .catch((err) =>{
+                    console.log(`error occured for = ${err}`)
+                })
+        }
+        init();
+    </script>
+</html>

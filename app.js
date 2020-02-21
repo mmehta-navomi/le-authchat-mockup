@@ -66,7 +66,7 @@ app.post('/btnclick', function (req, res) {
       res.send("button clicked....");
 })
 // Define the port to run on
-app.set('port', process.env.PORT || 3000);  // set environment variable PORT=443 to run app on https
+app.set('port', process.env.PORT || 8080);  // set environment variable PORT=443 to run app on https
 
 
 const server = app.listen(app.get('port'), function() {

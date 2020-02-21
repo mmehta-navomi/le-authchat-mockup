@@ -6,6 +6,8 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="https://lpcdn.lpsnmedia.net/webagent/client-SDK.min.js"></script>
         <script src="https://chancejs.com/chance.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
         <!-- <link rel="stylesheet" href="/css/custom-chat-window.css"> -->
         <title>LE Auth Test Page</title>
         <!-- <img src="https://img.icons8.com/color/48/000000/info.png" href="https://www.google.com"> -->
@@ -14,7 +16,10 @@
         <p>To reach out to an internal team, click below</p>
         <!-- Chat button div -->
         <div id="chatlink"></div>
-        <button type="button" name="button" onclick="btnclick();">Button</button>
+        <button type="button" name="button" onclick="btnclick();">Get JWT Token</button></br>
+
+        <textarea id="jwttoken" style="height:150px;width:450px"></textarea>
+        <button class="btn" data-clipboard-target="#jwttoken">Copy to clipboard</button>
         <script>
         // var siteId = '34185714';
         var siteId = '75070123';
@@ -26,19 +31,6 @@
 
     </body>
     <script type="text/javascript">
-    function btnclick (){
-        axios.post('/btnclick',{},{
-                headers: {
-                    'X-CUSTOM-HEADER': '12312-3123123-123123-123123-123'
-                }
-            })
-            .then((response) =>{
-                console.log(response);
-            })
-            .catch((err) =>{
-                console.log(err);
-            })
-    }
 
     let visitorName = chance.name();
     console.log(`visitorName = ${visitorName}`);
@@ -48,6 +40,25 @@
 
     let leConversationId = null;
     console.log(`leConversationId = ${leConversationId}`);
+
+    function btnclick (){
+        axios.get(`/getjwt?visitor=${visitorName}`)
+            .then((response) =>{
+                // On Success
+                let jwtToken = response.data.id_token;
+                //store token in  session storage
+                // sessionStorage.setItem('id_token', id_token);
+                console.log('Got jwtToken');
+                console.log(jwtToken);
+                $('#jwttoken').html(jwtToken);
+
+            })
+            .catch((err) =>{
+                console.log('Error Getting JWT');
+                console.log(err);
+                $('#jwttoken').html("Error See Console log");
+            })
+    }
 
     var onSuccess = function(data){
         // start internal conversation
@@ -100,7 +111,7 @@
           callback({
               iss: "issuerInfo",
               acr: "loa1", //don't need to change this
-              sub: "indetitySub"
+              sub: visitorName
           });
       }
     // 'lpGetAuthenticationToken' is set to window context rather than 'lpMethods' context.
