@@ -11,6 +11,7 @@ const csurf = require('csurf');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const helmet = require('helmet');
+const uuid = require('uuid/v4');
 var moment = require('moment');
 
 // var axios = require('axios');
@@ -76,7 +77,7 @@ const server = app.listen(app.get('port'), function() {
 
 
 /** Generate Paylod for JWT **/
-function generateJwt (subinfo){
+function generateJwt (info){
 
 	let dateNow = Math.round(Date.now()/1000);
 	// console.log(`dateNow ${dateNow}`);
@@ -87,11 +88,45 @@ function generateJwt (subinfo){
 	console.log('JWT Expire UTC= ', moment.utc(dateExp*1000).format('LLLL'));
 
 	let jwtconf = {};
-	jwtconf.sub = subinfo.visitor;
-	jwtconf.iss = "https://www.example.com";
-	jwtconf.iat = dateNow;
-	jwtconf.exp = dateExp;
-	jwtconf.aud = 'audiance'
+
+	console.log(info);
+	// new jwt
+		jwtconf.sub = "Consumer Subject";
+		jwtconf.iss = "https://www.example.com";
+		jwtconf.iat = dateNow;
+		jwtconf.exp = dateExp;
+		// jwtconf.aud = 'customer',
+		//personal info and ctmrinfo
+		//jwtconf["preferred_username"] ="Manan";
+	   	//jwtconf["phone_number"]="+1-123123123123123123123123123";
+   // 	"lp_sdes":[
+   //    {
+   //       "type":"ctmrinfo",
+   //       "info":{
+   //          "cstatus":"cancelled",
+   //          "ctype":"vip",
+   //          "customerId":"138766AC",
+   //          "balance":-400.99,
+   //          "socialId":"11256324780",
+   //          "imei":"3543546543545688",
+   //          "userName":"user000",
+   //          "companySize":500,
+   //          "accountName":"bank corp",
+   //          "role":"broker",
+   //          "lastPaymentDate":{
+   //             "day":15,
+   //             "month":10,
+   //             "year":2014
+   //          },
+   //          "registrationDate":{
+   //             "day":23,
+   //             "month":5,
+   //             "year":2013
+   //          }
+   //       }
+   //    }
+   // ]
+
 	return jwtconf;
 }
 // console.log('privkey',privkey);
@@ -133,3 +168,12 @@ app.get('/getjwt',async (req, res) =>{
 		}
 	});
 });
+
+app.get('/healthCheck', (req, res)=>{
+	if(req.query.check == 'fail'){
+
+		res.status(200).json({"message":"system is unhealthy"});
+	}else {
+		res.status(200).json({"message":"system is healthy"});
+	}
+})

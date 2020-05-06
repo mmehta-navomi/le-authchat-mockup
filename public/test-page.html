@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <title>Test Page</title>
+    </head>
+    <body>
+    <script>
+    // var siteid = "87604225";
+    var siteid = "75070123";
+    </script>
+        <!-- BEGIN LivePerson Monitor. -->
+    <script type="text/javascript">window.lpTag=window.lpTag||{},'undefined'==typeof window.lpTag._tagCount?(window.lpTag={wl:lpTag.wl||null,scp:lpTag.scp||null,site:siteid||'',section:lpTag.section||'',tagletSection:lpTag.tagletSection||null,autoStart:lpTag.autoStart!==!1,ovr:lpTag.ovr||{},_v:'1.10.0',_tagCount:1,protocol:'https:',events:{bind:function(t,e,i){lpTag.defer(function(){lpTag.events.bind(t,e,i)},0)},trigger:function(t,e,i){lpTag.defer(function(){lpTag.events.trigger(t,e,i)},1)}},defer:function(t,e){0===e?(this._defB=this._defB||[],this._defB.push(t)):1===e?(this._defT=this._defT||[],this._defT.push(t)):(this._defL=this._defL||[],this._defL.push(t))},load:function(t,e,i){var n=this;setTimeout(function(){n._load(t,e,i)},0)},_load:function(t,e,i){var n=t;t||(n=this.protocol+'//'+(this.ovr&&this.ovr.domain?this.ovr.domain:'lptag.liveperson.net')+'/tag/tag.js?site='+this.site);var o=document.createElement('script');o.setAttribute('charset',e?e:'UTF-8'),i&&o.setAttribute('id',i),o.setAttribute('src',n),document.getElementsByTagName('head').item(0).appendChild(o)},init:function(){this._timing=this._timing||{},this._timing.start=(new Date).getTime();var t=this;window.attachEvent?window.attachEvent('onload',function(){t._domReady('domReady')}):(window.addEventListener('DOMContentLoaded',function(){t._domReady('contReady')},!1),window.addEventListener('load',function(){t._domReady('domReady')},!1)),'undefined'===typeof window._lptStop&&this.load()},start:function(){this.autoStart=!0},_domReady:function(t){this.isDom||(this.isDom=!0,this.events.trigger('LPT','DOM_READY',{t:t})),this._timing[t]=(new Date).getTime()},vars:lpTag.vars||[],dbs:lpTag.dbs||[],ctn:lpTag.ctn||[],sdes:lpTag.sdes||[],hooks:lpTag.hooks||[],identities:lpTag.identities||[],ev:lpTag.ev||[]},lpTag.init()):window.lpTag._tagCount+=1;</script>
+    <!-- END LivePerson Monitor. -->
+    <script type="text/javascript">
+    lpTag.section  = ["needhelp"]
+    console.log('Pushing Hook Event.....');
+    var lineCounter = 0;
+    lpTag.events.bind("lpUnifiedWindow", "conversationInfo", function(data){
+        console.log('LP Tag Events Data');
+        console.log(`Agent Id = ${data.agentId}`);
+        //8bfeaba8-b171-5078-8acb-369f58d7aa1e
+        //8bfeaba8-b171-5078-8acb-369f58d7aa1e
+    });
+    // lpTag.hooks.push({
+    //     name: 'AFTER_GET_LINES',
+    //     callback: function(options) {
+    //         options.data.lines.forEach(function(line) {
+    //
+    //             // console.log(line);
+    //             // // for new convo ignore welcome Message
+    //             if(line.isWelcomeMessage){
+    //                 console.log('New Convo');
+    //                 lineCounter = 0;
+    //             }
+    //             if((line.source === "visitor" && line.state === "SENT") || (line.source === "agent" && line.state === "READ")){
+    //                 console.log(`source = ${line.source}`);
+    //                 // console.log(`state  = ${line.state}`);
+    //                 console.log(`conversationId  = ${line.convId}`);
+    //                 lineCounter = lineCounter + 1;
+    //                 console.log(`Current Line Counter = ${lineCounter}`);
+    //                 if(lineCounter === 4){
+    //                     console.log("Object Achieve...")
+    //                 }
+    //             }
+    //         });
+    //         return options
+    //     }
+    // });
+    
+    lpTag.events.bind('RENDERER_STUB', 'AFTER_CREATE_ENGAGEMENT_INSTANCE', data => {
+console.log(data);
+console.log(data.eng);
+console.log(data.eng.containerId);
+})
+    </script>
+    <script>
+
+        lpTag.section = ["testsection"]; //Section will help determine LP where to add button (alternative to page URLs)
+
+          lpTag.sdes = lpTag.sdes||[];
+            lpTag.sdes.push(
+               {
+                    "type": "personal",  //MANDATORY
+                        "personal": {
+                        "firstname": "John",  // FIRST NAME
+                        "lastname": "Doe",  // SURNAME
+                        "age": {
+                           "age": 34,  // AGE AS INTEGER
+                           "year": 1980,  // BIRTH YEAR
+                           "month": 4,  // BIRTH MONTH
+                           "day": 15  // BIRTH DAY
+                       },
+                        "contacts": [{
+                           "email": "1myname@example.com",  // EMAIL
+                           "phone": "+1 111-111-1111"  // PHONE NUMBER
+                           ,"address": {
+                               "region": "1276 new jersey || primary | Region 123123123123" // REGION
+                           }
+                       }],
+                        "gender": "MALE",  // MALE, FEMALE, OTHER
+                        "language": "en-US",  // LANGUAGE
+                        "company": "company"  // VISITOR COMPANY NAME
+                    }
+               }
+            );
+            //ERROR
+            lpTag.sdes.push({
+              "type": "error", //MANDATORY
+              "error": {
+                "contextId": "Credit card application",
+                "message": "test1", // ERROR MESSAGE
+                "code": "1", // ERROR CODE
+                "level": 10,
+                "resolved": false
+              }
+            })
+
+        //  // Customer Info
+        //  lpTag.sdes.push(
+        //     {
+        //          "type": "ctmrinfo",  //MANDATORY
+        //          "info": {
+        //             "customerId": "138766AC",  //UNIQUE CUSTOMER IDENTIFIER
+        //             "companyBranch": "East Village",  //THE CUSTOMER'S COMPANY BRANCH NAME
+        //          }
+        //     }
+        // );
+
+    </script>
+    <!-- button div -
+    <div id="testbtn"></div> -->
+    <div id="LP_DIV_1586281708204"></div>
+
+    <span>VZ Wirelinee Embedded</span>
+    <div id="LP_DIV_1586875442463"></div>
+
+    </body>
+
+</html>
