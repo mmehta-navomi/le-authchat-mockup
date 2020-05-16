@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <h2>Check Incoming SDEs</h2>
+        <script src="https://lpcdn.lpsnmedia.net/webagent/client-SDK.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js">
+
+        </script>
+    </head>
+    <body>
+        <!-- <div id="sdesdata"></div> -->
+        <pre id="sdesdata"></pre>
+
+        <script type="text/javascript">
+            var onSuccess = function(data){
+                // start internal conversation
+                accountId = data.accountId;
+                console.log(`accountId = ${accountId}`);
+
+                leConversationId = data.rtSessionId;
+                console.log(`leConversationId = ${leConversationId}`);
+                console.log(`data = ${JSON.stringify(data)}`);
+                document.getElementById("sdesdata").innerHTML = JSON.stringify(data,undefined, 2);
+
+
+            }
+
+            var onError = function(error){
+                console.log('Error while getting current chat data from SDK  = '  + error);
+                return;
+            }
+            lpTag.agentSDK.init();
+            var pathToData = "visitorInfo";
+
+            // lpTag.agentSDK.get(pathToData, onSuccess, onError);
+            lpTag.agentSDK.get("SDE", onSuccess, onError);
+            // lpTag.agentSDK.get("authenticatedData", onSuccess, onError);
+        </script>
+    </body>
+</html>

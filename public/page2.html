@@ -13,11 +13,13 @@
         <!-- <img src="https://img.icons8.com/color/48/000000/info.png" href="https://www.google.com"> -->
     </head>
     <body>
+        <p>To reach out to an internal team, click below</p>
         <!-- Chat button div -->
         <div id="chatlink"></div>
-        <!-- <button type="button" name="button" onclick="btnclick();">Get JWT Token</button></br>
+        <button type="button" name="button" onclick="btnclick();">Get JWT Token</button></br>
+
         <textarea id="jwttoken" style="height:150px;width:450px"></textarea>
-        <button class="btn" data-clipboard-target="#jwttoken">Copy to clipboard</button> -->
+        <button class="btn" data-clipboard-target="#jwttoken">Copy to clipboard</button>
         <script>
         // var siteId = '34185714';
         var siteId = '75070123';
@@ -41,7 +43,7 @@
 
     // Get JWT
     function btnclick (){
-        axios.get(`/getjwt?visitor=${visitorName}`)
+        axios.get(`/getjwt?visitor=anotherjwt`)
             .then((response) =>{
                 // On Success
                 let jwtToken = response.data.id_token;
@@ -49,7 +51,7 @@
                 // sessionStorage.setItem('id_token', id_token);
                 console.log('Got jwtToken');
                 console.log(jwtToken);
-                // $('#jwttoken').html(jwtToken);
+                $('#jwttoken').html(jwtToken);
 
             })
             .catch((err) =>{
@@ -102,35 +104,21 @@
 
     /***************** authentication block **********************/
     //Need to set identity info to initializing
-      // lpTag.identities = []
+      lpTag.identities = []
       lpTag.identities.push(identityFn);
       function identityFn(callback) {
           callback({
-              iss: "example.com",
+              iss: "issuerInfo",
               acr: "loa1", //don't need to change this
-              sub: "c2b5cae4-94ac-41e4-b5fa-5f4a8a155484" //random uuid
+              sub: "test" //random uuid
           });
       }
     // 'lpGetAuthenticationToken' is set to window context rather than 'lpMethods' context.
         // PLEASE UPDATE THE FUNCTION ON THE PAGE LIKE BELOW
         var lpGetAuthenticationToken = function(callback) {
-            console.log("LP asked for id_token");
-                axios.get(`/getjwt?visitor=JohnTester`)
-                    .then((response) =>{
-                        // On Success
-                        let id_token = response.data.id_token;
-                        //store token in  session storage
-                        // sessionStorage.setItem('id_token', id_token);
-                        console.log('Got id_token');
-                        console.log(id_token);
-                        callback(id_token)
-
-                    })
-                    .catch((err) =>{
-                        console.log('Error Getting JWT');
-                        console.log(err);
-                    })
-            // }
+            var token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdWJqZWN0IiwiaXNzIjoiaHR0cHM6Ly93d3cuZXhhbXBsZS5jb20iLCJpYXQiOjE1ODgxNzE0MjYsImV4cCI6MTU5MDc2MzQyNiwicHJlZmVycmVkX3VzZXJuYW1lIjoiTWFuYW4iLCJwaG9uZV9udW1iZXIiOiIrMS0xMjMxMjMxMjMxMjMxMjMxMjMxMjMxMjMxMjMifQ.N-7s4lV04kMkEzC2q2aUpZ3py2Nnr2wewwS7Ww_cxJceYTcX-480lkwOZyXFALi8Lc3j-3vvY8mANSWs2GcB71gCm3ng42wz3MGizkmjV3kepW2UNja7IGPGt7Xie35lRIqG7QLFhEv5TZ_wkZ4RIQcpW14VtKuqF-Oq9Wk9-KEcyjrKqh0Xpm8CgFkc_51UlfR7cB6OzrL_hXOQaJuuBkAvZL4O85qkWHpDz7iTC_8ADxHSMiT-iG3_YCkYytsVKB380d6IU0VXrxnaz5yD0l4D9N03giDf5egEm0iGikboIhgRC-ryT1LA94a8SuWK8jJacgnLVD2UAiwL3JjFEw";
+            console.log(`JWT Token=${token}`);
+            callback(token)
         }
 
         /***************** Chatinfo block **********************/
