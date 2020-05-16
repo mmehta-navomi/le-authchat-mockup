@@ -88,7 +88,7 @@ function generateJwt (subinfo){
 
 	let jwtconf = {};
 	jwtconf.sub = subinfo.visitor;
-	jwtconf.iss = "https://www.example.com";
+	jwtconf.iss = "Account-75070123";
 	jwtconf.iat = dateNow;
 	jwtconf.exp = dateExp;
 	jwtconf.aud = 'audiance'
