@@ -13,10 +13,11 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { v4: uuidv4 } = require('uuid');
 var moment = require('moment');
-
+const axios = require('axios');
 // var axios = require('axios');
 var app = express();
 
+const sendNotification = require('./sendNotification');
 
 app.use(helmet());
 // Body Parser
@@ -102,28 +103,13 @@ function generateJwt (info){
 	   "lp_sdes":[
 	      {
 	         "info":{
-				 "type":"ctmrinfo",
-	            "cstatus":" ",
-	            "ctype":" ",
+				"type":"ctmrinfo",
+	            "cstatus":"GOLD",
+	            "ctype":"VIP",
 	            "customerId":"138766AC",
 	            "balance":400.99,
 	            "socialId":"11256324780",
-	            "imei":"3543546543545688",
-	            "userName":"user000",
-	            "companySize":500,
-	            "accountName":"bank corp",
-	            "role":"broker",
-				"loginStatus": "yes",
-	            "lastPaymentDate":{
-	               "day":15,
-	               "month":10,
-	               "year":2014
-	            },
-	            "registrationDate":{
-	               "day":23,
-	               "month":5,
-	               "year":2013
-	            }
+	            "imei":"3543546543545688"
 	         }
 	      }
 	   ]
@@ -172,14 +158,20 @@ app.get('/getjwt',async (req, res) =>{
 });
 
 app.get('/health', (req, res)=>{
+	console.log("calling /health");
 	if(req.query.check == 'fail'){
-		res.status(200).json({"message":"system is unhealthy"});
+		res.status(200).send("system is unhealthy");
+		sendNotification('system is unhealthy');
 	}else {
-		res.status(200).json({"message":"system is healthy"});
+		res.status(200).send("system is healthy");
 	}
 })
 
-app.post('/exchangeconvo', (req, res)=>{
-	console.log('-------------exchange convo---------------');
-	console.log(req.body)
+app.get('/testTimeout', (req, res)=>{
+	console.log('Called TestTimout');
+	setTimeout(()=>{
+		// res.status(200).send({"sucess":"time out 30 sec"});
+	},
+	30000);
+
 })

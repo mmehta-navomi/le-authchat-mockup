@@ -3,13 +3,46 @@
     <head>
         <meta charset="utf-8">
         <script src="https://lpcdn.lpsnmedia.net/webagent/client-SDK.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <title>Agent SDK Widget Demo Page</title>
     </head>
     <body>
         <h4>Agent SDK Widget Demo Page</h4>
+        <div id="sdes"></div>
+
         <script type="text/javascript">
             console.log('LPTag SDK init');
             lpTag.agentSDK.init();
+
+            var success = function(data){
+                console.log(data);
+                console.log('calling success');
+                axios.get("/testTimeout")
+                    .then((response)=>{
+                        console.log(response.data)
+                        console.log ( 'Convo Line', data.newValue[0].text )
+                    })
+                    .cathc((err)=>{
+                        conosle.log(err);
+                    })
+            }
+            var notifyWhenDone = function(err){
+                if(err){
+                    cosnole.log("Error",err);
+                }
+                console.log('calling notifyWhenDone');
+                axios.get("/testTimeout")
+                    .then((response)=>{
+                        console.log(response.data)
+                        console.log ( 'data', data.newValue[0].text )
+                    })
+                    .cathc((err)=>{
+                        conosle.log(err);
+                    })
+            }
+            //get customer data:
+            lpTag.agentSDK.bind("chatTranscript.lines",success,notifyWhenDone);
+
 
             function sendLine(){
                     var notifyWhenDone = function(err) {

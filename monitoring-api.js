@@ -28,7 +28,10 @@ let options = {
  }
 };
 
-getVid(url,options)
+// getVid(url,options)
+for(let i=0; i<10; i++){
+    getVid(url,options);
+}
 
 function getVid(url, options){
   console.log('-----Getting vid--------');

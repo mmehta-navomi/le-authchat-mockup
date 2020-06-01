@@ -24,6 +24,10 @@
         //8bfeaba8-b171-5078-8acb-369f58d7aa1e
         //8bfeaba8-b171-5078-8acb-369f58d7aa1e
     });
+    // page info
+    console.log('does not have indentities function');
+    console.log('does not have lpGetAuthenticationToken function');
+
     // lpTag.hooks.push({
     //     name: 'AFTER_GET_LINES',
     //     callback: function(options) {
@@ -51,10 +55,10 @@
     // });
 
     lpTag.events.bind('RENDERER_STUB', 'AFTER_CREATE_ENGAGEMENT_INSTANCE', data => {
-console.log(data);
-console.log(data.eng);
-console.log(data.eng.containerId);
-})
+    console.log(data);
+    console.log(data.eng);
+    console.log(data.eng.containerId);
+    })
     </script>
     <script>
 

@@ -94,6 +94,10 @@
         }
     });
 
+    // page info
+    console.log('has indentities function');
+    console.log('has lpGetAuthenticationToken function');
+
     //Check for LPTag
     // console.log('LPTag SDK has loaded');
     // lpTag.agentSDK.init({notificationCallback: notificationHandler});
@@ -102,7 +106,7 @@
 
     /***************** authentication block **********************/
     //Need to set identity info to initializing
-      // lpTag.identities = []
+      lpTag.identities = []
       lpTag.identities.push(identityFn);
       function identityFn(callback) {
           callback({
