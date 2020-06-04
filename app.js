@@ -170,7 +170,7 @@ app.get('/health', (req, res)=>{
 app.get('/testTimeout', (req, res)=>{
 	console.log('Called TestTimout');
 	setTimeout(()=>{
-		// res.status(200).send({"sucess":"time out 30 sec"});
+		res.status(200).send({"sucess":"time out 30 sec"});
 	},
 	30000);
 
