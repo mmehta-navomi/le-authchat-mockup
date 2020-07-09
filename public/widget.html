@@ -14,20 +14,28 @@
             console.log('LPTag SDK init');
             lpTag.agentSDK.init();
 
-            var success = function(data){
+            var onSuccess = function(data){
                 console.log('calling success');
                 // console.log(JSON.stringify(data));
-                console.log(JSON.stringify(data));
-                console.log('type',data.newValue[0].type);
+                console.log(data);
             }
-            var notifyWhenDone = function(err){
+            var onError = function(err){
+                if (err){
+                    console.log('calling error');
+                    console.log(err);
+                    // console.log(JSON.stringify(data));
+                }
+            }
+            /*var notifyWhenDone = function(err){
                 if(err){
                     cosnole.log("Error",err);
                 }
                 console.log('calling notifyWhenDone');
-            }
-            //get customer data:
-            lpTag.agentSDK.bind("chatTranscript.lines",success,notifyWhenDone);
+            }*/
+            //get  data:
+            var pathToData = "chatInfo";
+            // lpTag.agentSDK.bind("chatTranscript.lines",onSuccess,notifyWhenDone);
+            lpTag.agentSDK.get(pathToData, onSuccess, onError);
 
 
             function sendLine(){

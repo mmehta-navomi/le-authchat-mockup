@@ -14,10 +14,15 @@ const helmet = require('helmet');
 const { v4: uuidv4 } = require('uuid');
 var moment = require('moment');
 const axios = require('axios');
+// Load Chance
+var Chance = require('chance');
 // var axios = require('axios');
 var app = express();
 
 const sendNotification = require('./sendNotification');
+
+// Instantiate Chance so it can be used
+var chance = new Chance();
 
 app.use(helmet());
 // Body Parser
@@ -89,32 +94,41 @@ function generateJwt (info){
 	console.log('JWT Expire UTC= ', moment.utc(dateExp*1000).format('LLLL'));
 
 	console.log(info);
-
 	let jwtconf = {
-	   "sub":"Johnny - The Doe",
+	   "sub": uuidv4(),
 	   "iss":"https://www.YourBrand.com",
 	   "exp": dateExp,
 	   "iat": dateNow,
-	   "given_name": "John",
-	   "family_name": "Doe",
-	   "email": "john.doe@doe.com",
-	   "preferred_username":"john.doe",
+	   "given_name": chance.name(),
 	   "phone_number":"+1-10-344-3765333",
 	   "lp_sdes":[
 	      {
+	         "type":"ctmrinfo",
 	         "info":{
-				"type":"ctmrinfo",
-	            "cstatus":"GOLD",
-	            "ctype":"VIP",
+	            "cstatus":"cancelled",
+	            "ctype":"vip",
 	            "customerId":"138766AC",
-	            "balance":400.99,
+	            "balance":-400.99,
 	            "socialId":"11256324780",
-	            "imei":"3543546543545688"
+	            "imei":"",
+	            "userName":"user000",
+	            "companySize":500,
+	            "accountName":"bank corp",
+	            "role":"broker",
+	            "lastPaymentDate":{
+	               "day":15,
+	               "month":10,
+	               "year":2014
+	            },
+	            "registrationDate":{
+	               "day":23,
+	               "month":5,
+	               "year":2013
+	            }
 	         }
 	      }
-	   ]
-	};
-
+	  ]
+		}
 	return jwtconf;
 }
 // console.log('privkey',privkey);

@@ -13,14 +13,23 @@
         <!-- <img src="https://img.icons8.com/color/48/000000/info.png" href="https://www.google.com"> -->
     </head>
     <body>
-        <!-- Chat button div -->
-        <div id="chatlink"></div>
+        <!-- UnAuth Chat button div -->
+        <div id="unauth-chatlink"></div><br />
+        <!-- Auth Chat button div -->
+        <div id="auth-chatlink"></div><br />
+        <!-- Bot button div -->
+        <div id="botbutton"></div>
+        <div id="nuance-chat-container-2"></div>
+        <div id="nuance-chat-container-1"></div>
+
         <!-- <button type="button" name="button" onclick="btnclick();">Get JWT Token</button></br>
         <textarea id="jwttoken" style="height:150px;width:450px"></textarea>
         <button class="btn" data-clipboard-target="#jwttoken">Copy to clipboard</button> -->
         <script>
         // var siteId = '34185714';
+        // var siteId = '87604225';
         var siteId = '75070123';
+        // var siteId = '23979466';
         // var siteId = '56355204';
         </script>
         <!-- BEGIN LivePerson Monitor. GA -->
@@ -29,7 +38,7 @@
 
     </body>
     <script type="text/javascript">
-    lpTag.section = ["section1","section2","section3"];
+    lpTag.section = ["credithold"];
     let visitorName = chance.name();
     console.log(`visitorName = ${visitorName}`);
 
@@ -58,7 +67,17 @@
                 $('#jwttoken').html("Error See Console log");
             })
     }
-
+    lpTag.sdes.push({
+          "type": "error", //MANDATORY
+          "error": {
+            "contextId": "Credit card application",
+            "message": "Expiration date missing", // ERROR MESSAGE
+            "code": "er100004", // ERROR CODE
+            "level": 10,
+            "resolved": false
+          }
+        }
+)
     // var onSuccess = function(data){
     //     // start internal conversation
     //     accountId = data.accountId;
