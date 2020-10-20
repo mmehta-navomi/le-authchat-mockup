@@ -1,4 +1,5 @@
 'use strict';
+require('dotenv').config()
 
 // requiring the service controller
 const express = require('express');
@@ -19,7 +20,8 @@ var Chance = require('chance');
 // var axios = require('axios');
 var app = express();
 
-const sendNotification = require('./sendNotification');
+// const sendNotification = require('./sendNotification');
+// const fetchMesssage = require('./fetchTranscript');
 
 // Instantiate Chance so it can be used
 var chance = new Chance();
@@ -55,17 +57,8 @@ const pubkey = fs.readFileSync(pubkeyloc).toString('utf-8');
 // 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 // 	next();
 // });
-
-// error handler
-// app.use(function (err, req, res, next) {
-// 	console.log(req.headers);
-// 	console.log(err);
-//   if (err.code !== 'EBADCSRFTOKEN') return next(err)
-//
-//   // handle CSRF token errors here
-//   res.status(403)
-//   res.send('page tampered with')
 // })
+
 //Using some public files
 app.use(express.static(path.join(__dirname, 'public')));
 

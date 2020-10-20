@@ -2,3 +2,4 @@
 node_modules/*
 privkey.key
 pubkey.key
+yarn-error.log

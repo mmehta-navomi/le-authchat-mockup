@@ -1,36 +1,55 @@
 'use strict'
 
-const rTracer = require('cls-rtracer')
-// that how you can configure winston logger
-const winston = require('winston');
-const { combine, timestamp, printf, align, colorize} = winston.format
+// const winston = require('winston');
+const { createLogger, format, transports } = require('winston');
+const { combine, timestamp, printf } = format;
 
-// a custom format that outputs request id
-const rTracerFormat = printf(({ service, level, message, timestamp }) => {
-  const rid = rTracer.id()
-  return rid
-    ? `${level}:  ${service}: ${timestamp}: [request-id:${rid}]:  ${message}`
-    : `${level}:  ${service}: ${timestamp}: ${message}`
-})
+const myFormat = printf(
+    ({ level, message, accountId, datapoint, converationId }) => {
 
-const logger = winston.createLogger({
-  defaultMeta: {
-        service: 'Testing-Service-Name',
+        const logObject = {
+          converationId :converationId,
+          accountId :accountId,
+          datapoint :datapoint,
+        }
+        // set undefined cariables as NA
+        accountId = accountId ? accountId : 'NA';
+        user = user ? user : 'NA';
+        chatId = chatId ? chatId : 'NA';
+
+        /* Example: logger.info(`${req.method} ${req.url}`, {admin: true, accountId: '9876'});*/
+        if (admin) {
+            var objReturn = `{timestamp: ${timestamp}, accountId: ${accountId}, user: ${user}, message: [ADMIN] ${message}, level: ${level}}`;
+        } else {
+            var objReturn = `{timestamp: ${timestamp}, chatId: ${chatId}, accountId: ${accountId}, user: ${user}, message: ${message}, level: ${level}}`;
+        }
+
+        // return `{timestamp: ${timestamp}, level: ${level}, message: ${message}}`;
+        return objReturn;
+    }
+);
+
+const logger = createLogger({
+    // level: 'debug',
+    defaultMeta: {
+        service: 'navomi-fileshare-widget',
     },
-  level: 'info',
-  format: combine(
-    timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-    align()
-  ),
-  transports: [
-    new winston.transports.Console({
+    format: combine(
+        timestamp({
+            format: 'YYYY-MM-DD HH:mm:ss',
+        }),
+        // winston.format.printf(
+        //     (info) => `${info.message} ${info.level} ${info.timestamp}`
+        // ),
+        format.json()
+    ),
+    transports: [
+        new transports.Console({
             level: 'info',
             handleExceptions: true,
-            format: combine(rTracerFormat),
+            format: combine(myFormat),
         }),
-    // Add Stackdriver Logging
-    // loggingWinston,
-  ],
+    ],
 });
 
 // Log example:
@@ -40,7 +59,6 @@ const logger = winston.createLogger({
 const express = require('express')
 
 const app = express()
-app.use(rTracer.expressMiddleware())
 
 app.get('/', function (req, res) {
   logger.info('info level log')
@@ -63,6 +81,5 @@ app.listen(3000, (err) => {
   if (err) {
     logger.err('The app could not start')
   }
-  logger.info(`Environment: ${process.env.NODE_ENV}`)
   logger.info('The app is listening on 3000')
 })

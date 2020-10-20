@@ -33,9 +33,27 @@
                 console.log('calling notifyWhenDone');
             }*/
             //get  data:
-            var pathToData = "chatInfo";
+            var pathToData = "chatInfo.rtSessionId";
             // lpTag.agentSDK.bind("chatTranscript.lines",onSuccess,notifyWhenDone);
             lpTag.agentSDK.get(pathToData, onSuccess, onError);
+
+            var focusHandler = function() {
+                console.log("Visitor focused on the widget")
+                // Do something when the visitor is focused
+                // Assume the visitor is focused to begin with
+            };
+            // Add a visitor focus handler.
+            lpTag.agentSDK.onVisitorFocused(focusHandler);
+
+            var blurHandler = function() {
+                console.log("Visitor blurred on the widget")
+                // Do something when the visitor is blurred
+                // Assume the visitor is focused to begin with
+            };
+
+            // Add a visitor blur handler.
+            lpTag.agentSDK.onVisitorBlurred(blurHandler);
+
 
 
             function sendLine(){
