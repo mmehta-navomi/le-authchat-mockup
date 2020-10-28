@@ -54,7 +54,7 @@ timer = setInterval(testarray, 1000); // create skill every 3 seconds; adding in
 
 /**
  * Create a skill
- * URL: https://va.ac.liveperson.net/api/account/<AccountID>/configuration/le-users/skills?v=2.0
+ * URL: https://va.ac.liveperson.net/api/account/<AccountID/configuration/le-users/skills?v=2.0
  * Please be careful using this URL and use it wisely; Do not brute the API call
  */
 function createSkillFunc(){
