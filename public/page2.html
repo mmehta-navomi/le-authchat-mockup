@@ -16,10 +16,10 @@
         <p>To reach out to an internal team, click below</p>
         <!-- Chat button div -->
         <div id="chatlink"></div>
-        <button type="button" name="button" onclick="btnclick();">Get JWT Token</button></br>
+        <button type="button" name="button" onclick="btnclick();">Get JWT Token</button></br><br />
 
-        <textarea id="jwttoken" style="height:150px;width:450px"></textarea>
-        <button class="btn" data-clipboard-target="#jwttoken">Copy to clipboard</button>
+        <textarea id="jwttoken" style="height:150px;width:90%"></textarea>
+        <br /><button onclick="copyText()">Copy to clipboard</button>
         <script>
         // var siteId = '34185714';
         var siteId = '75070123';
@@ -41,6 +41,19 @@
     let leConversationId = null;
     console.log(`leConversationId = ${leConversationId}`);
 
+
+    // copy text
+    function copyText(){
+    /* Get the text field */
+      var copyText = document.getElementById("jwttoken");
+      /* Select the text field */
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+      /* Copy the text inside the text field */
+      document.execCommand("copy");
+      /* Alert the copied text */
+      alert("Copied to Clipboard !!");
+    }
     // Get JWT
     function btnclick (){
         axios.get(`/getjwt?visitor=anotherjwt`)

@@ -121,8 +121,10 @@ function generateJwt (info){
 	         }
 	      }
 	  ]
-		}
+  }
+
 	return jwtconf;
+
 }
 // console.log('privkey',privkey);
 // console.log('privkey',privkey);
@@ -145,7 +147,7 @@ app.get('/getjwt',async (req, res) =>{
 
 	// sign jwt
 	//generate jwt
-	jwt.sign(jwtConf, privkey, { algorithm: 'RS256'}, function(err, token) {
+	jwt.sign(jwtConf, privkey, {keyid: 'VZEs_AItTzm_YlJb5K_dKFD3JrVSyf6Hzky665Q5YQM',algorithm: 'RS256'}, function(err, token) {
 		if(err){
 			console.log('err==>',err);
 		}else {

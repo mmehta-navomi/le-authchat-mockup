@@ -66,17 +66,6 @@
                 $('#jwttoken').html("Error See Console log");
             })
     }
-    lpTag.sdes.push({
-          "type": "error", //MANDATORY
-          "error": {
-            "contextId": "Credit card application",
-            "message": "Expiration date missing", // ERROR MESSAGE
-            "code": "er100004", // ERROR CODE
-            "level": 10,
-            "resolved": false
-          }
-        }
-)
     // var onSuccess = function(data){
     //     // start internal conversation
     //     accountId = data.accountId;
@@ -116,6 +105,7 @@
     console.log('has indentities function');
     console.log('has lpGetAuthenticationToken function');
 
+    
     //Check for LPTag
     // console.log('LPTag SDK has loaded');
     // lpTag.agentSDK.init({notificationCallback: notificationHandler});

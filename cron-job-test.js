@@ -2,7 +2,7 @@ const CronJob = require('cron').CronJob;
 console.log('Before job instantiation');
 
 let job = new CronJob(
-	'* * * * * *',
+	'*/5 * * * * *',
 	function() {
 		init()
 		// job.stop();
@@ -15,9 +15,9 @@ console.log('After job instantiation');
 
 // Use this if the 4th param is default value(false)
 job.start();
-console.log(`job ran lasttime = ${job.lastDate()}`);
-console.log(`job ran nextime = ${job.nextDates()}`);
 function init(){
+	console.log(`job ran lasttime = ${job.lastDate()}`);
+	console.log(`job ran nextime = ${job.nextDates()}`);
 	console.log("init funciton fires");
 	init2()
 }
@@ -27,5 +27,5 @@ function init2(){
 	// console.log(`job ran nextime = ${job.nextDates()}`);
 	console.log("Job stop");
 	// job.stop();
-	process.exit(0);
+	//process.exit(0);
 }
