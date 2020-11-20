@@ -8,6 +8,7 @@
         <script src="https://chancejs.com/chance.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
         <!-- <link rel="stylesheet" href="/css/custom-chat-window.css"> -->
         <title>LE Auth Test Page</title>
         <!-- <img src="https://img.icons8.com/color/48/000000/info.png" href="https://www.google.com"> -->
@@ -66,46 +67,14 @@
                 $('#jwttoken').html("Error See Console log");
             })
     }
-    // var onSuccess = function(data){
-    //     // start internal conversation
-    //     accountId = data.accountId;
-    //     console.log(`accountId = ${accountId}`);
-    //
-    //     leConversationId = data.rtSessionId;
-    //     console.log(`leConversationId = ${leConversationId}`);
-    // }
-    // var onError = function(error){
-    //     console.log('Error while getting current chat data from SDK  = '  + error);
-    //     return;
-    // }
-
-    //Agent SDK Notification Callback
-    // var notificationHandler = function(data) {
-    //     // Do something with the notifications
-    //     console.log('notify an agent', data);
-    // };
 
     //Get incoming line data engagement window
-    console.log('Pushing Hook Event.....');
-    lpTag.hooks.push({
-        name: 'AFTER_GET_LINES',
-        callback: function(options) {
-            options.data.lines.forEach(function(line) {
-                console.log(line)
-                if (line.source === 'agent' && line.state === 'ACCEPT') {
-                    console.log('source is agent');
-                    lpTag.agentSDK.command(lpTag.agentSDK.cmdNames.notify, {}, notificationHandler)
-                }
-            });
-            return options
-        }
-    });
 
     // page info
     console.log('has indentities function');
     console.log('has lpGetAuthenticationToken function');
 
-    
+
     //Check for LPTag
     // console.log('LPTag SDK has loaded');
     // lpTag.agentSDK.init({notificationCallback: notificationHandler});
@@ -145,65 +114,7 @@
             // }
         }
 
-        /***************** Chatinfo block **********************/
-            //         function init () {
-            //     lpTag.hooks.push({
-            //         name: 'BEFORE_SEND_VISITOR_LINE',
-            //         callback: opts => {
-            //             if (opts && opts.data && opts.data.line && opts.data.line.text === '/convinfo') {
-            //                 let engagementEvents = lpTag.events.hasFired('LE_ENGAGER', '*');
-            //                 let convEvents = lpTag.events.hasFired('lpUnifiedWindow', '*');
-            //                 let renderEvents = lpTag.events.hasFired('RENDERER_STUB','AFTER_CREATE_ENGAGEMENT_INSTANCE');
-            //
-            //                 let engId = getLatest(engagementEvents, 'engagementId');
-            //                 let skillId = getLatest(convEvents, 'skill');
-            //                 let engagementConf = findRenderEventConf(renderEvents, engId) || {};
-            //
-            //                 let data = {
-            //                     siteId: lpTag.site,
-            //                     sections: lpTag.section,
-            //                     campaign: getLatest(engagementEvents, 'campaignId'),
-            //                     engagement: engagementConf.name || engId,
-            //                     window: getLatest(engagementEvents, 'windowId'),
-            //                     state: getLatest(convEvents, 'state'),
-            //                     agentName: getLatest(convEvents, 'agentName'),
-            //                     agentId: getLatest(convEvents, 'agentId'),
-            //                     convId: getLatest(convEvents, 'conversationId'),
-            //                     skill: engagementConf.skillName || skillId,
-            //                     visitorId: getLatest(convEvents, 'visitorId')
-            //                 };
-            //
-            //                 let div = document.createElement('div');
-            //                 div.id = 'lp_line_convinfo';
-            //                 div.innerText = JSON.stringify(data, null, '\t');
-            //                 document.getElementsByClassName('lpc_transcript')[0].appendChild(div);
-            //
-            //                 opts.data.line.text = '';
-            //                 let scrollable = document.getElementsByClassName('lp_location_center')[0];
-            //                 scrollable.scrollTop = scrollable.scrollHeight
-            //
-            //             }
-            //         }
-            //     })
-            // }
-            //
-            // waitForTag(init);
-            //
-            // function getLatest (array, datum) {
-            //     let event = array.reverse().find(item => {
-            //         return item.data && item.data[datum]
-            //     });
-            //     if (event) return event.data[datum];
-            //     else return undefined;
-            // }
-            //
-            // function findRenderEventConf (renderEvents, engagementId) {
-            //      let event = renderEvents.find(ev => {
-            //         return ev && ev.data && ev.data.conf && (ev.data.conf.id === engagementId)
-            //     });
-            //     return event.data.conf
-            // }
-        /***************** Chatinfo block **********************/
+
         /***************** authentication block **********************/
 
         /***************** LE Events block **********************/

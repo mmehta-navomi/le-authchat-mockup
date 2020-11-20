@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+        <title>Simple LE Page</title>
+    </head>
+    <body>
+        <script>
+        var siteId = "<accountId>"
+        </script>
+        <!-- BEGIN LivePerson Monitor. -->
+        <script type="text/javascript">window.lpTag=window.lpTag||{},'undefined'==typeof window.lpTag._tagCount?(window.lpTag={wl:lpTag.wl||null,scp:lpTag.scp||null,site:siteId||'',section:lpTag.section||'',tagletSection:lpTag.tagletSection||null,autoStart:lpTag.autoStart!==!1,ovr:lpTag.ovr||{},_v:'1.10.0',_tagCount:1,protocol:'https:',events:{bind:function(t,e,i){lpTag.defer(function(){lpTag.events.bind(t,e,i)},0)},trigger:function(t,e,i){lpTag.defer(function(){lpTag.events.trigger(t,e,i)},1)}},defer:function(t,e){0===e?(this._defB=this._defB||[],this._defB.push(t)):1===e?(this._defT=this._defT||[],this._defT.push(t)):(this._defL=this._defL||[],this._defL.push(t))},load:function(t,e,i){var n=this;setTimeout(function(){n._load(t,e,i)},0)},_load:function(t,e,i){var n=t;t||(n=this.protocol+'//'+(this.ovr&&this.ovr.domain?this.ovr.domain:'lptag.liveperson.net')+'/tag/tag.js?site='+this.site);var o=document.createElement('script');o.setAttribute('charset',e?e:'UTF-8'),i&&o.setAttribute('id',i),o.setAttribute('src',n),document.getElementsByTagName('head').item(0).appendChild(o)},init:function(){this._timing=this._timing||{},this._timing.start=(new Date).getTime();var t=this;window.attachEvent?window.attachEvent('onload',function(){t._domReady('domReady')}):(window.addEventListener('DOMContentLoaded',function(){t._domReady('contReady')},!1),window.addEventListener('load',function(){t._domReady('domReady')},!1)),'undefined'===typeof window._lptStop&&this.load()},start:function(){this.autoStart=!0},_domReady:function(t){this.isDom||(this.isDom=!0,this.events.trigger('LPT','DOM_READY',{t:t})),this._timing[t]=(new Date).getTime()},vars:lpTag.vars||[],dbs:lpTag.dbs||[],ctn:lpTag.ctn||[],sdes:lpTag.sdes||[],hooks:lpTag.hooks||[],identities:lpTag.identities||[],ev:lpTag.ev||[]},lpTag.init()):window.lpTag._tagCount+=1;</script>
+        <!-- END LivePerson Monitor. -->
+        <!-- UnAuth Chat button div -->
+        <div id="unauth-chatlink"></div><br />
+        <!-- Auth Chat button div -->
+        <div id="auth-chatlink"></div><br />
+        <!-- Bot button div -->
+        <div id="botbutton"></div>
+        <script>
+
+        // define hooks if not not already
+        // lpTag.hooks=lpTag.hooks||[];
+
+        /***************** Get the time of first message sent by visitor in visitor browser **********************/
+        // BEFORE_SEND_VISITOR_LINE Hook API
+        lpTag.firstMsg = true;
+        lpTag.hooks.push({
+           name: "BEFORE_SEND_VISITOR_LINE",
+           callback: function(options) {
+               if (lpTag.firstMsg) {
+                   console.log("First visitor message: "+Date());
+               }
+               lpTag.firstMsg = false;
+           }
+        });
+        /***************** Get the time of first message sent by visitor in visitor browser **********************/
+
+        /***************** Change “first-time” customer welcome message in visitor browser **********************/
+        try {
+         //Change welcome message text for "first-time" Web Messaging customers
+         // setTimeout(function() {
+           lpTag.hooks.push({
+             name: "AFTER_GET_LINES",
+             callback: function (options) {
+               // console.log(options);
+               console.log('Do Something after line sent');
+             }
+           });
+        } catch(e) {
+            console.log('Error: ' + e);
+        }
+
+        /***************** Change “first-time” customer welcome message in visitor browser **********************/
+        /***************** Chatinfo block when visitor sends '/convinfo' **********************/
+            // function init() {
+                lpTag.hooks.push({
+                    name: 'BEFORE_SEND_VISITOR_LINE',
+                    callback: opts => {
+                        if (opts && opts.data && opts.data.line && opts.data.line.text === '/convinfo') {
+                            let engagementEvents = lpTag.events.hasFired('LE_ENGAGER', '*');
+                            let convEvents = lpTag.events.hasFired('lpUnifiedWindow', '*');
+                            let renderEvents = lpTag.events.hasFired('RENDERER_STUB', 'AFTER_CREATE_ENGAGEMENT_INSTANCE');
+
+                            let engId = getLatest(engagementEvents, 'engagementId');
+                            let skillId = getLatest(convEvents, 'skill');
+                            let engagementConf = findRenderEventConf(renderEvents, engId) || {};
+
+                            let data = {
+                                siteId: lpTag.site,
+                                sections: lpTag.section,
+                                campaign: getLatest(engagementEvents, 'campaignId'),
+                                engagement: engagementConf.name || engId,
+                                window: getLatest(engagementEvents, 'windowId'),
+                                state: getLatest(convEvents, 'state'),
+                                agentName: getLatest(convEvents, 'agentName'),
+                                agentId: getLatest(convEvents, 'agentId'),
+                                convId: getLatest(convEvents, 'conversationId'),
+                                skill: engagementConf.skillName || skillId,
+                                visitorId: getLatest(convEvents, 'visitorId')
+                            };
+
+                            let div = document.createElement('div');
+                            div.id = 'lp_line_convinfo';
+                            div.innerText = JSON.stringify(data, null, '\t');
+                            document.getElementsByClassName('lpc_transcript')[0].appendChild(div);
+
+                            opts.data.line.text = '';
+                            let scrollable = document.getElementsByClassName('lp_location_center')[0];
+                            scrollable.scrollTop = scrollable.scrollHeight
+
+                        }
+                    }
+                })
+            // }
+
+            waitForTag(init);
+
+            function getLatest(array, datum) {
+                let event = array.reverse().find(item => {
+                    return item.data && item.data[datum]
+                });
+                if (event) return event.data[datum];
+                else return undefined;
+            }
+
+            function findRenderEventConf(renderEvents, engagementId) {
+                let event = renderEvents.find(ev => {
+                    return ev && ev.data && ev.data.conf && (ev.data.conf.id === engagementId)
+                });
+                return event.data.conf
+            }
+        /***************** Chatinfo block **********************/
+
+
+        </script>
+    </body>
+</html>
