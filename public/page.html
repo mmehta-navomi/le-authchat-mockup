@@ -107,21 +107,30 @@
         // PLEASE UPDATE THE FUNCTION ON THE PAGE LIKE BELOW
         var lpGetAuthenticationToken = function(callback) {
             console.log("LP asked for id_token");
+            if(sessionStorage.getItem("id_token")){
+                // Restore the contents of the text field
+                console.log('JWT in storage...');
+                jwtToken = sessionStorage.getItem("id_token");
+                callback(jwtToken);
+            }else{
                 axios.get(`/getjwt?visitor=JohnTester`)
-                    .then((response) =>{
-                        // On Success
-                        let id_token = response.data.id_token;
-                        //store token in  session storage
-                        // sessionStorage.setItem('id_token', id_token);
-                        console.log('Got id_token');
-                        console.log(id_token);
-                        callback(id_token)
+                .then((response) =>{
+                    // On Success
+                    let id_token = response.data.id_token;
+                    // Save data to sessionStorage
+                    sessionStorage.setItem('id_token', id_token);
+                    //store token in  session storage
+                    // sessionStorage.setItem('id_token', id_token);
+                    console.log('Got id_token');
+                    console.log(id_token);
+                    callback(id_token)
 
-                    })
-                    .catch((err) =>{
-                        console.log('Error Getting JWT');
-                        console.log(err);
-                    })
+                })
+                .catch((err) =>{
+                    console.log('Error Getting JWT');
+                    console.log(err);
+                })
+            }
             // }
         }
 
