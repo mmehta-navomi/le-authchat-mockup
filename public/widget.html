@@ -14,28 +14,61 @@
             console.log('LPTag SDK init');
             lpTag.agentSDK.init();
 
-            var onSuccess = function(data){
-                console.log('calling success');
-                // console.log(JSON.stringify(data));
-                console.log(data);
-            }
-            var onError = function(err){
-                if (err){
-                    console.log('calling error');
-                    console.log(err);
-                    // console.log(JSON.stringify(data));
-                }
-            }
+            // var onSuccess = function(data){
+            //     console.log('calling success');
+            //     // console.log(JSON.stringify(data));
+            //     console.log(data);
+            // }
+            // var onError = function(err){
+            //     if (err){
+            //         console.log('calling error');
+            //         console.log(err);
+            //         // console.log(JSON.stringify(data));
+            //     }
+            // }
             /*var notifyWhenDone = function(err){
                 if(err){
                     cosnole.log("Error",err);
                 }
                 console.log('calling notifyWhenDone');
             }*/
-            //get  data:
-            var pathToData = "SDE.searchContent";
+
+            //Transcript data
             // lpTag.agentSDK.bind("chatTranscript.lines",onSuccess,notifyWhenDone);
-            lpTag.agentSDK.get(pathToData, onSuccess, onError);
+
+            // SDE data
+            lpTag.agentSDK.get("SDE",
+                (successData)=>{
+                    console.log('SDE success');
+                    console.log(successData);
+                    },
+                (error)=>{
+                    console.log('SDE error');
+                    console.log(err);
+            });
+
+            //application theme
+             lpTag.agentSDK.get("applicationInfo",
+                 (successData)=>{
+                     console.log('applicationInfo success');
+                     console.log(successData);
+                     },
+                 (error)=>{
+                     console.log('applicationInfo error');
+                     console.log(err);
+             });
+
+            // visitior info
+            lpTag.agentSDK.get("visitorInfo",
+                (successData)=>{
+                    console.log('visitorInfo success');
+                    console.log(successData);
+                    },
+                (error)=>{
+                    console.log('visitorInfo error');
+                    console.log(err);
+            });
+
 
             var focusHandler = function() {
                 console.log("Visitor focused on the widget")

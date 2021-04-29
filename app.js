@@ -66,7 +66,7 @@ app.post('/btnclick', function (req, res) {
       res.send("button clicked....");
 })
 // Define the port to run on
-app.set('port', process.env.PORT || 8080);  // set environment variable PORT=443 to run app on https
+app.set('port', process.env.PORT || 3000);  // set environment variable PORT=443 to run app on https
 
 
 const server = app.listen(app.get('port'), function() {
@@ -176,11 +176,17 @@ app.get('/health', (req, res)=>{
 	}
 })
 
-app.get('/testTimeout', (req, res)=>{
-	console.log('Called TestTimout');
-	setTimeout(()=>{
-		res.status(200).send({"sucess":"time out 30 sec"});
-	},
-	30000);
+app.get('/preevent', function(req, res){
+	console.log(req.body);
+	res.status(200).send("Good");
+});
+// Testing Redirect
+app.post('/postevent', function(req, res){
+	console.log(req.body);
+	res.status(200).send("Good");
+});
 
-})
+app.get('/user', function(req, res){
+	console.log(req.originalUrl);
+    res.send("Redirected to User Page");
+});

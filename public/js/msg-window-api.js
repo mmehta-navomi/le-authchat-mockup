@@ -35,7 +35,7 @@ function handleOpenedSocket(socket,jwt) {
 
   const me = myId(jwt);
 
-  socket.initConnection({},[{ "type": ".ams.headers.ConsumerAuthentication","deviceFamily":"DESKTOP","os":"WINDOWS", "jwt": jwt},{"type":".ams.headers.ClientProperties","features":["CO_BROWSE"]}]);
+  socket.initConnection({},[{ "type": ".ams.headers.ConsumerAuthentication","deviceFamily":"DESKTOP","os":"WINDOWS", "jwt": jwt},{"type":".ams.headers.ClientProperties","ipAddress": "192.168.5.2","features":["CO_BROWSE"]}]);
   socket.onNotification(withType('MessagingEvent'),
     body => body.changes.forEach(change => {
       switch (change.event.type) {
