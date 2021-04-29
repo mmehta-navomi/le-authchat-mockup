@@ -33,7 +33,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged && yarn audit"
+      "pre-commit": "yarn audit"
     }
   }
 }
