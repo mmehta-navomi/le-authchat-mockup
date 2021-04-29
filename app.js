@@ -13,7 +13,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const { v4: uuidv4 } = require('uuid');
-// var moment = require('moment');
+var moment = require('moment');
 const axios = require('axios');
 // Load Chance
 var Chance = require('chance');
