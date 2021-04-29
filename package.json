@@ -8,7 +8,8 @@
   "scripts": {
     "start": "node app.js",
     "watch": "nodemon app.js",
-    "packageaudit": "yarn audit"
+    "packageaudit": "yarn audit",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -35,7 +36,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "packageaudit"
+      "pre-commit": "test"
     }
   }
 }
