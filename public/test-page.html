@@ -9,8 +9,8 @@
         <!-- <a href="http://localhost:8080/page.html">LINK</a> -->
     <script>
     // var siteid = "87604225";
-    var siteid = "64581370";
-    // var siteid = "75070123";
+    // var siteid = "64581370";
+    var siteid = "75070123";
     </script>
         <!-- BEGIN LivePerson Monitor. -->
     <script type="text/javascript">window.lpTag=window.lpTag||{},'undefined'==typeof window.lpTag._tagCount?(window.lpTag={wl:lpTag.wl||null,scp:lpTag.scp||null,site:siteid||'',section:lpTag.section||'',tagletSection:lpTag.tagletSection||null,autoStart:lpTag.autoStart!==!1,ovr:lpTag.ovr||{},_v:'1.10.0',_tagCount:1,protocol:'https:',events:{bind:function(t,e,i){lpTag.defer(function(){lpTag.events.bind(t,e,i)},0)},trigger:function(t,e,i){lpTag.defer(function(){lpTag.events.trigger(t,e,i)},1)}},defer:function(t,e){0===e?(this._defB=this._defB||[],this._defB.push(t)):1===e?(this._defT=this._defT||[],this._defT.push(t)):(this._defL=this._defL||[],this._defL.push(t))},load:function(t,e,i){var n=this;setTimeout(function(){n._load(t,e,i)},0)},_load:function(t,e,i){var n=t;t||(n=this.protocol+'//'+(this.ovr&&this.ovr.domain?this.ovr.domain:'lptag.liveperson.net')+'/tag/tag.js?site='+this.site);var o=document.createElement('script');o.setAttribute('charset',e?e:'UTF-8'),i&&o.setAttribute('id',i),o.setAttribute('src',n),document.getElementsByTagName('head').item(0).appendChild(o)},init:function(){this._timing=this._timing||{},this._timing.start=(new Date).getTime();var t=this;window.attachEvent?window.attachEvent('onload',function(){t._domReady('domReady')}):(window.addEventListener('DOMContentLoaded',function(){t._domReady('contReady')},!1),window.addEventListener('load',function(){t._domReady('domReady')},!1)),'undefined'===typeof window._lptStop&&this.load()},start:function(){this.autoStart=!0},_domReady:function(t){this.isDom||(this.isDom=!0,this.events.trigger('LPT','DOM_READY',{t:t})),this._timing[t]=(new Date).getTime()},vars:lpTag.vars||[],dbs:lpTag.dbs||[],ctn:lpTag.ctn||[],sdes:lpTag.sdes||[],hooks:lpTag.hooks||[],identities:lpTag.identities||[],ev:lpTag.ev||[]},lpTag.init()):window.lpTag._tagCount+=1;</script>
@@ -19,6 +19,48 @@
     <div id="unauth-chatlink"></div><br />
     <script type="text/javascript">
     lpTag.section = ["unauthbutton"];
+    function mutaionObserverHandler() {
+            try {
+                // Callback function to execute when mutations are observed
+                var callback = function(mutationsList) {
+                    // Use traditional 'for loops' for IE 11
+                    for (var mutation of mutationsList) {
+                        if (mutation.type === 'attributes') {
+                            //Check for maxHeight attribut in Style
+                            var maxHeight = mutation.target.style.maxHeight;
+                            if (maxHeight) {
+                                //If true add two new CSS to the page
+                                document.getElementsByClassName('lp_location_bottom')[0].style.bottom = "65px";
+                                document.getElementsByClassName("lp_transcript_widget")[0].style.paddingBottom = "50px";
+                            } else {
+                                document.getElementsByClassName('lp_location_bottom')[0].style.bottom = "0px";
+                                document.getElementsByClassName("lp_transcript_widget")[0].style.paddingBottom = "0px";
+                            }
+                        }
+                    }
+                };
+                // Select the node that will be observed for mutations
+                var targetNode = document.getElementsByClassName('lp_maximized')[0];
+                // Create an observer instance linked to the callback function
+                var observer = new MutationObserver(callback);
+                // Options for the observer (which mutations to observe)
+                var configMutation = {
+                    attributes: true,
+                    attributeFilter: ['style']
+                };
+                // Start observing the target node for configured mutations
+                observer.observe(targetNode, configMutation);
+                mutaionObserverMounted = true;
+            } catch (e) {
+                console.log(e);
+                setTimeout(mutaionObserverHandler, 1000);
+            };
+        }
+        //Binding the Mutation code to lpUnifiedWindow event
+        lpTag.events.bind('lpUnifiedWindow', 'state', function() {
+            if (mutaionObserverMounted) return;
+            mutaionObserverHandler();
+        });
     </script>
     </body>
 
