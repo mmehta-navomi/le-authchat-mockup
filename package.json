@@ -25,7 +25,7 @@
     "express": "^4.16.4",
     "helmet": "^3.18.0",
     "jsonwebtoken": "^8.4.0",
-    "luxon": "^1.25.0",
+    "luxon": "^2.5.2",
     "moment": "^2.29.1",
     "oauth-1.0a": "^2.2.6",
     "request": "^2.88.2",
